@@ -1,3 +1,5 @@
 # agenda
 
-`DEBUG=agenda:* npm start` to start
+`git clone` to fetch the project  
+`npm init` to init  
+`npm start` to start

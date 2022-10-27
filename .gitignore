@@ -59,3 +59,7 @@ typings/
 
 # next.js build output
 .next
+
+#On ignore les builds automatique
+public/index.html
+public/assets/

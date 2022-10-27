@@ -5,7 +5,7 @@ import logger from 'morgan';
 import { fileURLToPath } from 'url';
 
 import { router as indexRouter } from './routes/index.js';
-import { router as usersRouter } from './routes/users.js';
+import { router as apiRouter } from './routes/api.js';
 
 let __filename = fileURLToPath(import.meta.url);
 let __dirname = path.dirname(__filename);
@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api', apiRouter);
 
 
 export { app };
