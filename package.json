@@ -6,7 +6,8 @@
   "scripts": {
     "start": "DBUG=express:* nodemon -e js,json ./bin/www",
     "build": "vite build",
-    "watch": "vite build --watch"
+    "watch": "vite build --watch",
+    "initBD": "node scripts/initBD.js"
   },
   "dependencies": {
     "@vitejs/plugin-vue": "^3.1.2",
