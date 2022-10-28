@@ -1,5 +1,7 @@
 'use strict';
 import express from 'express';
+import fdb from '../lib/fakeDB.js';
+
 let router = express.Router();
 
 /* GET users listing. */
@@ -8,7 +10,9 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/test', (req, res, next) => {
-  res.json({ title: 'Ceci est un test', message: 'Testons tout ça' });
+  let obj = fdb.getById('users', 20);
+  console.log(obj);
+  res.json({ title: 'Ceci est un test', message: obj.name });
 });
 
 router.post('/post', (req, res, next) => {
