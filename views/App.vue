@@ -1,5 +1,4 @@
 <script>
-import axios from "axios";
 
 export default {
     data() {
@@ -10,7 +9,7 @@ export default {
     },
 
     beforeMount() {
-        axios({
+        this.$http({
             method: 'get',
             url: '/api/test'
         }).then((response, err) => {
