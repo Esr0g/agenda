@@ -26,4 +26,9 @@ app.use('/', indexRouter);
 app.use('/api', apiRouter);
 app.use('/api/auth', userAuth, authRouter);
 
+// Gestion de toutes les autres routes indéfinie : erreur
+app.get('*', (req, res, next) => {
+    res.status(404).send("<h1>Error 404 not found.</h1>");
+})
+
 export { app };

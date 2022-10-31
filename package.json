@@ -5,12 +5,13 @@
   "type": "module",
   "scripts": {
     "start": "DBUG=express:* nodemon -e js,json ./src/bin/www",
-    "build": "vite build",
-    "watch": "vite build --watch",
+    "build": "rm -rf ./public/assets/ && vite build",
+    "watch": "vite build --watch --emptyOutDir",
     "initBD": "node scripts/initBD.js"
   },
   "dependencies": {
     "@vitejs/plugin-vue": "^3.1.2",
+    "autoprefixer": "^10.4.13",
     "axios": "^1.1.3",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "~1.4.4",
@@ -20,6 +21,8 @@
     "jsonwebtoken": "^8.5.1",
     "morgan": "~1.9.1",
     "nodemon": "^2.0.20",
+    "postcss": "^8.4.18",
+    "tailwindcss": "^3.2.1",
     "underscore": "^1.13.6",
     "vite": "^3.1.8",
     "vue": "^3.2.41"
