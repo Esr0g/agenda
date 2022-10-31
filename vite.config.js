@@ -2,9 +2,9 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
-    root: 'views/',
+    root: 'src/views/',
     plugins: [vue()],
     build: {
-        outDir: "../public/"
+        outDir: "../../public/"
     }
 });
