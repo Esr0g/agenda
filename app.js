@@ -6,7 +6,6 @@ import logger from 'morgan';
 import { fileURLToPath } from 'url';
 
 import { userAuth } from './src/middelware/auth.js';
-import { router as indexRouter } from './src/routes/index.js';
 import { router as apiRouter } from './src/routes/apiRoutes.js';
 import { router as authRouter } from './src/routes/authRoutes.js';
 
@@ -22,13 +21,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
 app.use('/api', apiRouter);
 app.use('/api/auth', userAuth, authRouter);
 
 // Gestion de toutes les autres routes indéfinie : erreur
 app.get('*', (req, res, next) => {
-    res.status(404).send("<h1>Error 404 not found.</h1>");
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 })
 
 export { app };

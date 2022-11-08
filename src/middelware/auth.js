@@ -27,7 +27,9 @@ export function register(req, res, next) {
     }
 
     try {
+        
         if (userModel.findOne({ username })) {
+            
             res.status(400).json({
                 message: "Une erreur est survenue",
                 error: "Nom d'utilisateur déjà utilisé."
@@ -37,6 +39,7 @@ export function register(req, res, next) {
                 let user = userModel.add(userModel.createUser(username, hash));
 
                 const maxAge = 3 * 60 * 60;
+                
                 const token = jwt.sign({
                     id: user.id,
                     username,

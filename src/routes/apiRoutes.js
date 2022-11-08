@@ -8,4 +8,9 @@ let router = express.Router();
 router.post('/register', register);
 router.post('/login', login);
 
+// Route de test
+router.get('/test', (req, res, next) => {
+    res.status(200).json({ message: "Test working" });
+});
+
 export { router };
