@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import LoginForm from "../../views/components/LoginForm.vue";
-import RegisterForm from "../../views/components/RegisterForm.vue";
-import Home from "../../views/components/Home.vue";
+import LoginForm from "./components/LoginForm.vue";
+import RegisterForm from "./components/RegisterForm.vue";
+import Home from "./components/Home.vue";
+import MonthView from "./components/MonthView.vue";
 
 const routes = [
     {
@@ -18,7 +19,7 @@ const routes = [
         name: 'RegisterForm',
         path: '/register',
         component: RegisterForm
-    },
+    }
 ];
 
 const router = createRouter({
