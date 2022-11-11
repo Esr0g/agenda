@@ -113,6 +113,14 @@ export default {
             this.passwordOnError = false;
             return true;
         }
+    },
+
+    mounted() {
+        window.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                this.login();
+            }
+        })
     }
 };
 </script>
