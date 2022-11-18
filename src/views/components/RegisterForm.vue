@@ -103,6 +103,7 @@ export default {
                     data: { username : this.username, password: this.password }
                 }).then((res) => {
                     this.$emit('close', true);
+                    this.config.globalProperties.$user = res.data.username;
                     this.$router.push('/');
                 }).catch((err) => {
                     const info = err.response.data;

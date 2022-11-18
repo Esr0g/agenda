@@ -49,10 +49,16 @@ export function register(req, res, next) {
                     httpOnly: true,
                     maxAge: maxAge * 1000
                 });
+                
+                res.cookie("ma", JSON.stringify({ username: user.username, id: user.id }), {
+                    httpOnly: false,
+                    maxAge: maxAge * 1000,
+                    encode: String
+                })
 
                 res.status(200).json({
                     message: "Utilisateur crée avec succès",
-                    user: user.id
+                    username: user.username
                 });
                 next();
             });
@@ -104,9 +110,15 @@ export function login(req, res, next) {
                         maxAge: maxAge * 1000
                     });
 
+                    res.cookie("ma", JSON.stringify({ username: user.username, id: user.id }), {
+                        httpOnly: false,
+                        maxAge: maxAge * 1000,
+                        encode: String
+                    })
+
                     res.status(200).json({
                         message: "Connexion réussie",
-                        user
+                        username: user.username
                     });
                     next();
                 } else {
@@ -148,16 +160,6 @@ export function deleteUser(req, res, next) {
     }
 }
 
-/**
- * Permet de mettre à jour un utilisateur dans fdb
- * @param {*} req 
- * @param {*} res 
- * @param {*} next 
- */
-export function updateUser(req, res, next) {
-
-}
-
 export function userAuth(req, res, next) {
     const token = req.cookies.jwt;
 
@@ -178,4 +180,11 @@ export function userAuth(req, res, next) {
             error: "Token invalide"
         });
     }
+}
+
+export function logout(req, res, next) {
+    res.clearCookie("ma");
+    res.clearCookie("jwt");
+    res.status(200);
+    next();
 }

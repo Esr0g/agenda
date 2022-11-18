@@ -88,23 +88,27 @@ export default {
             date: null,
             cases: [],
             showAddEventModal: false,
-            dateSelected: null
+            dateSelected: null,
         };
     },
+
     beforeMount() {
         this.monthName = mois[this.$dayjs().month()] + " " + this.$dayjs().year();
         this.date = this.$dayjs();
         this.initCases();
     },
+
     mounted() {
         this.setJourCases();
     },
+
     methods: {
         initCases() {
             for (let i = 0; i < 42; i++) {
                 this.cases.push({ num: i });
             }
         },
+
         setJourCases() {
             this.cases = [];
             let nbCasesParcourue = 0;
@@ -120,6 +124,10 @@ export default {
             nbJourMoisP = nbJourMoisP - firstDayOfMonthA + 1;
 
             for (let i = 0; i < firstDayOfMonthA; i++) {
+                if (this.$dayjs().isSame(moisPP, 'day')) {
+                    document.querySelector('#case-' + nbCasesParcourue).classList.add("jourActuel");
+                }
+
                 const uneCase = {
                     num: nbJourMoisP,
                     date: moisPP.toJSON()
@@ -132,6 +140,10 @@ export default {
 
             let moisA = this.date.startOf("month");
             for (let i = 1; i < nbJourMoisA + 1; i++) {
+                if (this.$dayjs().isSame(moisA, 'day')) {
+                    document.querySelector('#case-' + nbCasesParcourue).classList.add("jourActuel");
+                }
+
                 const uneCase = {
                     num: i,
                     date: moisA.toJSON()
@@ -145,6 +157,10 @@ export default {
             let moisS = this.date.endOf("month").add(1, "day");
             let jourMoisS = 1;
             for (let i = nbCasesParcourue; i < 42; i++) {
+                if (this.$dayjs().isSame(moisS, 'day')) {
+                    document.querySelector('#case-' + nbCasesParcourue).classList.add("jourActuel");
+                }
+
                 const uneCase = {
                     num: jourMoisS,
                     date: moisS.toJSON()
@@ -169,6 +185,7 @@ export default {
         rezBgCell() {
             for (let i = 0; i < 42; i++) {
                 document.querySelector("#case-" + i).classList.remove("jour-blanc");
+                document.querySelector("#case-" + i).classList.remove("jourActuel");
             }
         },
         rezDate() {
@@ -219,6 +236,10 @@ table {
 
 .num:hover {
     background-color: #06b6d4;
+}
+
+.jourActuel {
+    background-color: #1e8da07b;
 }
 
 </style>
