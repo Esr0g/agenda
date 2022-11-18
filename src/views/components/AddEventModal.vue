@@ -19,7 +19,7 @@
                 <h2 class="text-lg font-bold text-center">{{ showDate(date) }}</h2>
                 <form>
                     <div class="flex items-center mb-4">
-                        <input id="default-checkbox" type="checkbox" v-model="allDay" value="" @change="toggleTimePickers" class="w-4 h-4 text-blue-600 bg-gray-50 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <input id="default-checkbox" type="checkbox" v-model="form.allDay" value="" @change="toggleTimePickers" class="w-4 h-4 text-blue-600 bg-gray-50 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="default-checkbox" class="ml-2 text-md font-medium text-gray-900 dark:text-gray-400">Toute la journée</label>
                     </div>
                     <div v-if="showTimePickers" class="flex">
@@ -28,7 +28,7 @@
                             <input type="time"
                                 class="form-control block px-2 py-1 text-base font-normal text-gray-700 bg-gray-50 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                 name="tempsDeb"
-                                v-model="heureDeb"/>
+                                v-model="form.heureDeb"/>
                             <button tabindex="0" type="button" class="timepicker-toggle-button" data-mdb-toggle="timepicker">
                                 <i class="fas fa-clock timepicker-icon"></i>
                             </button>
@@ -39,7 +39,7 @@
                             <input type="time"
                                 class="form-control block px-2 py-1 text-base font-normal text-gray-700 bg-gray-50 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                 name="tempsFin"
-                                v-model="heureFin"/>
+                                v-model="form.heureFin"/>
                             <button tabindex="0" type="button" class="timepicker-toggle-button" data-mdb-toggle="timepicker">
                                 <i class="fas fa-clock timepicker-icon"></i>
                             </button>
@@ -48,12 +48,12 @@
                     <label for="nomEvt" class="block mb-2 text-md font-medium text-gray-900 dark:text-gray-400">Nom de l'événement : </label>
                     <input type="text" class="form-control block w-full px-1 py-1.5 text-sm font-normal text-gray-70 
                                 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 
-                                focus:text-gray-700 focus:bg-gray-50 focus:border-blue-600 focus:outline-none bg-gray-50" name="nomEvt" v-model="nomEvt"/>
+                                focus:text-gray-700 focus:bg-gray-50 focus:border-blue-600 focus:outline-none bg-gray-50" name="nomEvt" v-model="form.name"/>
 
                     <label for="lieu" class="block my-2 text-md font-medium text-gray-900 dark:text-gray-400">Lieu : </label>
                     <input type="text" class="form-control block w-full px-3 py-1.5 text-sm font-normal text-gray-70
                                 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 
-                                focus:text-gray-700 focus:bg-gray-50 focus:border-blue-600 focus:outline-none bg-gray-50" name="lieu" v-model="lieu"/>
+                                focus:text-gray-700 focus:bg-gray-50 focus:border-blue-600 focus:outline-none bg-gray-50" name="lieu" v-model="form.adresse"/>
 
                     <label for="description" class="block my-2 text-md font-medium text-gray-900 dark:text-gray-400">Description : </label>
                     <textarea id="description" rows="2" class="block resize-none p-2.5 w-full text-sm font-normal text-gray-70
@@ -82,12 +82,16 @@ export default {
     data() {
         return {
             showTimePickers: true,
-            allDay: false,
-            heureDeb: "",
-            heureFin: "",
-            nomEvt: "",
-            lieu: "",
-            descriptionEvt: ""
+            form: {
+                userID: null,
+                date: null,
+                name: null,
+                adresse: null,
+                dateDeb: null,
+                dateFin: null,
+                description: null,
+                allDay: null
+            }
         };
     },
 
@@ -112,10 +116,14 @@ export default {
         addEvent() {
             //TODO ajouter un événement
             let data = {
-                userID: null,
-                date: null,
-                name: null
-
+                userID: this.form.userID,
+                date: this.form.date,
+                name: this.form.name,
+                adresse: this.form.adresse,
+                heureDeb: this.form.heureDeb,
+                heureFin: this.form.heureFin,
+                desription: this.form.description,
+                allday: this.form.allDay
             };
 
             this.$http({
@@ -123,7 +131,7 @@ export default {
                 url: "/api/auth/addEvent",
                 data: data
             }).then((res) => {
-
+                console.log(res);
             });
         }
     },
@@ -135,7 +143,7 @@ export default {
     position: fixed;
     top: 30%;
     left: 50%;
-    transform: translate(-25%, -20%);
+    transform: translate(-25%, -23%);
 }
 
 #shadow {

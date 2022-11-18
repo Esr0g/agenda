@@ -61,5 +61,4 @@ typings/
 .next
 
 #On ignore les builds automatique
-public/index.html
 public/assets/
