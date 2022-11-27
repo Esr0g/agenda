@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "start": "DBUG=express:* nodemon -e js,json ./src/bin/www",
+    "start2": "set DEBUG=express:* & node .\\src\\bin\\www.js",
     "build": "rm -rf ./public/assets/ && vite build",
+    "build2": "del -rf .\\public\\assets\\ && vite build",
     "watch": "vite build --watch --emptyOutDir",
     "initBD": "node scripts/initBD.js"
   },
