@@ -4,7 +4,7 @@ import AbstractSchema from "./abstractSchema.js";
 /**
  * Model représenant les événements
  */
-export default class Event extends AbstractSchema {
+export default class MyEvent extends AbstractSchema {
 
     constructor() {
         super();
@@ -12,14 +12,13 @@ export default class Event extends AbstractSchema {
         this.table = 'events'
     }
 
-    createEvent(userID, date, name, adresse, heureDeb, heureFin, description, allDay) {
+    createEvent(userID, dateDeb, dateFin, name, adresse, description, allDay) {
         let event = {
             userID,
-            date,
+            dateDeb,
+            dateFin,
             name,
             adresse,
-            heureDeb,
-            heureFin,
             description,
             allDay
         }

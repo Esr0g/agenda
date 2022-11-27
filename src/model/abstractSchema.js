@@ -75,4 +75,13 @@ export default class AbstractSchema {
         return fdb.findOne(this.#table, properties);
     }
 
+    /**
+     * Retourne tous les objets qui match les propriétés
+     * @param {*} properties 
+     * @returns 
+     */
+    findAll(properties) {
+        return fdb.findAll(this.#table, properties);
+    }
+
 }

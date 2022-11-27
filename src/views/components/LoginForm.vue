@@ -80,8 +80,6 @@ export default {
                     url: 'api/login',
                     data: { username: this.username, password: this.password }
                 }).then((res) => {
-                    console.log(res.data);
-                    this.$user = res.data.username;
                     this.$router.push('/');
                 }).catch((err) => {
                     const info = err.response.data;

@@ -16,35 +16,41 @@
             </div>
             <!-- Modal body -->
             <div class="p-4 space-y-4">
-                <h2 class="text-lg font-bold text-center">{{ showDate(date) }}</h2>
                 <form>
                     <div class="flex items-center mb-4">
                         <input id="default-checkbox" type="checkbox" v-model="form.allDay" value="" @change="toggleTimePickers" class="w-4 h-4 text-blue-600 bg-gray-50 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="default-checkbox" class="ml-2 text-md font-medium text-gray-900 dark:text-gray-400">Toute la journée</label>
+                        <label for="default-checkbox" class="ml-2 text-md font-medium text-gray-900 dark:text-gray-400">Toute la journée : {{ showDate(date) }}</label>
                     </div>
-                    <div v-if="showTimePickers" class="flex">
-                        <div class="mr-4">
-                            <label for="tempsDeb" class="mb-3">Heure début : </label>
-                            <input type="time"
-                                class="form-control block px-2 py-1 text-base font-normal text-gray-700 bg-gray-50 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    <div v-if="showTimePickers" class="flex flex-col">
+                        <div class="mr-4 flex ">
+                            <div>
+                                <label for="dateDeb" class="font-bold">Date du début: </label>
+                                <input type="date" v-model="date" name="dateDeb" class="form-control mx-3 px-2 py-1 text-base font-normal text-gray-700 bg-gray-50 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-nones"/>
+                            </div>
+                            <div>
+                                <input type="time"
+                                class="form-control mx-3 block px-2 py-1 text-base font-normal text-gray-700 bg-gray-50 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                 name="tempsDeb"
                                 v-model="form.heureDeb"/>
-                            <button tabindex="0" type="button" class="timepicker-toggle-button" data-mdb-toggle="timepicker">
-                                <i class="fas fa-clock timepicker-icon"></i>
-                            </button>
+                                <button tabindex="0" type="button" class="timepicker-toggle-button" data-mdb-toggle="timepicker">
+                                    <i class="fas fa-clock timepicker-icon"></i>
+                                </button>
+                            </div>
                         </div>
 
-                        <div class="mx-4">
-                            <label for="tempsFin" class="mb-3">Heure fin : </label>
+                        <div class="flex mb-3">
+                            <label for="dateFin" class="mb-3 font-bold mr-7">Date de fin: </label>
+                            <input type="date" v-model="form.dateFin" name="dateFin" class="form-control mx-3 px-2 py-1 text-base font-normal text-gray-700 bg-gray-50 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-nones"/>
                             <input type="time"
-                                class="form-control block px-2 py-1 text-base font-normal text-gray-700 bg-gray-50 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                class="form-control mx-3 block px-2 py-1 text-base font-normal text-gray-700 bg-gray-50 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                 name="tempsFin"
                                 v-model="form.heureFin"/>
                             <button tabindex="0" type="button" class="timepicker-toggle-button" data-mdb-toggle="timepicker">
                                 <i class="fas fa-clock timepicker-icon"></i>
                             </button>
                         </div>
-                    </div> 
+                    </div>
+                    <div v-show="error" class="text-center text-red-600">{{ errorMessage }}</div>
                     <label for="nomEvt" class="block mb-2 text-md font-medium text-gray-900 dark:text-gray-400">Nom de l'événement : </label>
                     <input type="text" class="form-control block w-full px-1 py-1.5 text-sm font-normal text-gray-70 
                                 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 
@@ -83,15 +89,17 @@ export default {
         return {
             showTimePickers: true,
             form: {
-                userID: null,
-                date: null,
                 name: null,
                 adresse: null,
-                dateDeb: null,
                 dateFin: null,
-                description: null,
-                allDay: null
-            }
+                descriptionEvt: null,
+                allDay: null,
+                heureDeb: null,
+                heureFin: null,
+                dateFin: null
+            },
+            error: false,
+            errorMessage: ""
         };
     },
 
@@ -105,8 +113,8 @@ export default {
         },
 
         showDate(date) {
-            let d = this.$dayjs(date);
-            return jours[d.day()] + " " + d.date() + " " + mois[d.month()] + " " + d.year();
+            let d = date.split("-");
+            return d[2] + "/" + d[1] + "/" + d[0];
         },
 
         toggleTimePickers() {
@@ -114,25 +122,84 @@ export default {
         },
 
         addEvent() {
-            //TODO ajouter un événement
-            let data = {
-                userID: this.form.userID,
-                date: this.form.date,
-                name: this.form.name,
-                adresse: this.form.adresse,
-                heureDeb: this.form.heureDeb,
-                heureFin: this.form.heureFin,
-                desription: this.form.description,
-                allday: this.form.allDay
-            };
+            let data = {};
+            if (!this.form.allDay) {
 
+                if (this.form.dateFin) {
+                    if (!this.getDateFin().isBefore(this.getDateDeb())) {
+                        data = {
+                            userID: this.getUserId(),
+                            dateDeb: this.getDateDeb(),
+                            dateFin: this.getDateFin(),
+                            name: this.form.name,
+                            adresse: this.form.adresse,
+                            desription: this.form.descriptionEvt,
+                            allday: this.form.allDay
+                        };
+                        this.sendDataEvt(data);
+                    } else {
+                        this.error = true;
+                        this.errorMessage = "La date de fin ne peut pas être avant la date de début.";
+                    }
+                    
+                } else {
+                    this.error = true;
+                    this.errorMessage = "Il faut ajouter une date de fin";
+                }
+                
+
+            } else {
+                data = {
+                    userID: parseInt(this.getUserId()),
+                    dateDeb: this.$dayjs(this.date, "YYYY-MM-DD"),
+                    dateFin: null,
+                    name: this.form.name,
+                    adresse: this.form.adresse,
+                    desription: this.form.descriptionEvt,
+                    allday: this.form.allDay
+                };
+                this.sendDataEvt(data);
+            }
+        },
+
+        sendDataEvt(data) {
             this.$http({
                 method: "post",
                 url: "/api/auth/addEvent",
                 data: data
             }).then((res) => {
-                console.log(res);
+                this.hidde();
+            }).catch((err) => {
+                console.log(err);
             });
+        },
+
+        getDateDeb() {
+            let dateDeb = this.$dayjs(this.date, "YYYY-MM-DD");
+            if (this.form.heureDeb) {
+                let temps = this.form.heureDeb.split(":");
+                dateDeb = dateDeb.hour(temps[0]);
+                dateDeb = dateDeb.minute(temps[1]);
+            }
+
+            return dateDeb;
+        },
+
+        getDateFin() {
+            let dateFin = this.$dayjs(this.form.dateFin, "YYYY-MM-DD");
+            if (this.form.heureFin) {
+                let temps = this.form.heureFin.split(":");
+                dateFin = dateFin.hour(temps[0]);
+                dateFin = dateFin.minute(temps[1]);
+            }
+
+            return dateFin;
+        },
+
+        getUserId() {
+            let cookies = document.cookie.split("=");
+            let user = JSON.parse(cookies[1]);
+            return user.id;
         }
     },
 }
