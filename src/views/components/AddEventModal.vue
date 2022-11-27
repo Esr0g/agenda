@@ -18,7 +18,7 @@
             <div class="p-4 space-y-4">
                 <form>
                     <div class="flex items-center mb-4">
-                        <input id="default-checkbox" type="checkbox" v-model="form.allDay" value="" @change="toggleTimePickers" class="w-4 h-4 text-blue-600 bg-gray-50 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <input id="default-checkbox" type="checkbox" v-model="form.allDay" @change="toggleTimePickers" class="w-4 h-4 text-blue-600 bg-gray-50 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="default-checkbox" class="ml-2 text-md font-medium text-gray-900 dark:text-gray-400">Toute la journée : {{ showDate(date) }}</label>
                     </div>
                     <div v-if="showTimePickers" class="flex flex-col">
@@ -64,7 +64,7 @@
                     <label for="description" class="block my-2 text-md font-medium text-gray-900 dark:text-gray-400">Description : </label>
                     <textarea id="description" rows="2" class="block resize-none p-2.5 w-full text-sm font-normal text-gray-70
                                 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 
-                                focus:text-gray-700 focus:bg-gray-50 focus:border-blue-600 focus:outline-none bg-gray-50" placeholder="Description..." v-model="descriptionEvt"></textarea>
+                                focus:text-gray-700 focus:bg-gray-50 focus:border-blue-600 focus:outline-none bg-gray-50" placeholder="Description..." v-model="form.descriptionEvt"></textarea>
                 </form>
             </div>
             <!-- Modal footer -->
@@ -93,7 +93,7 @@ export default {
                 adresse: null,
                 dateFin: null,
                 descriptionEvt: null,
-                allDay: null,
+                allDay: false,
                 heureDeb: null,
                 heureFin: null,
                 dateFin: null
@@ -133,8 +133,8 @@ export default {
                             dateFin: this.getDateFin(),
                             name: this.form.name,
                             adresse: this.form.adresse,
-                            desription: this.form.descriptionEvt,
-                            allday: this.form.allDay
+                            description: this.form.descriptionEvt,
+                            allDay: this.form.allDay
                         };
                         this.sendDataEvt(data);
                     } else {
@@ -146,8 +146,6 @@ export default {
                     this.error = true;
                     this.errorMessage = "Il faut ajouter une date de fin";
                 }
-                
-
             } else {
                 data = {
                     userID: parseInt(this.getUserId()),
@@ -155,8 +153,8 @@ export default {
                     dateFin: null,
                     name: this.form.name,
                     adresse: this.form.adresse,
-                    desription: this.form.descriptionEvt,
-                    allday: this.form.allDay
+                    description: this.form.descriptionEvt,
+                    allDay: this.form.allDay
                 };
                 this.sendDataEvt(data);
             }

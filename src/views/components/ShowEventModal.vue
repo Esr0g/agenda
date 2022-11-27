@@ -16,7 +16,14 @@
                 </div>
                 <!-- Modal body -->
                 <div class="p-4 space-y-4">
-                   
+                    <h4><b>Début : </b></h4>
+                    <p>{{ getDateDebut() }}</p>
+                    <h4><b>Fin : </b></h4>
+                    <p>{{ getDateFin() }}</p>
+                    <h4><b>Lieu : </b></h4>
+                    <p>{{ event.adresse }}</p>
+                    <h4><b>Description : </b></h4>
+                    <p>{{ event.description }}</p>
                 </div>
                 <!-- Modal footer -->
                 <div class="flex items-center p-4 space-x-6 rounded-b border-t border-gray-200 dark:border-gray-600">
@@ -32,6 +39,8 @@
     </template>
     
     <script>
+    const mois = ["Janvier", "Février", "Mars", "Avril", "Mais", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre"];
+const jours = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
     
     export default {
         name: 'ShowEventModal',
@@ -65,6 +74,19 @@
                 }).catch((err) => {
                     console.err(err);
                 })
+            },
+
+            getDateDebut() {
+                console.log(this.event);
+                let date = this.$dayjs(this.event.dateDeb);
+                return jours[date.day()] + " " + date.date() + " " + mois[date.month()] + " " + date.year()
+                    + " à " + date.format("H:MM");
+            },
+
+            getDateFin() {
+                let date = this.$dayjs(this.event.dateFin);
+                return jours[date.day()] + " " + date.date() + " " + mois[date.month()] + " " + date.year()
+                    + " à " + date.format("H:MM");
             }
         }
     }
