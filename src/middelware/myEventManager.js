@@ -33,7 +33,7 @@ export function addEvent(req, res, next) {
             
             let event = eventModel.add(eventModel.createEvent(userID, dateDeb, dateFin, name, adresse, description, allDay));
 
-            eventEmitter.emit('event_changes', event);
+            eventEmitter.emit('event_changes', { event, type: "ADD" });
 
             res.status(200).json({
                 message: "Evénement crée avec succès",
@@ -53,6 +53,7 @@ export function addEvent(req, res, next) {
 
 /**
  * Récupère tous les événements liés à l'id d'un utilisateur en fonctions de paramètres
+ * date de début et date de fin sous une forme parsable par dayjs
  * précisé
  * @param {*} req 
  * @param {*} res 
@@ -104,6 +105,12 @@ export function getEventParam(req, res, next) {
     
 }
 
+/**
+ * Fonction qui s'occupe du long polling
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 export function getEventUpdate(req, res, next) {
     const responseHandler = (changes) => {
         res.json(changes);
@@ -111,4 +118,44 @@ export function getEventUpdate(req, res, next) {
     };
 
     eventEmitter.on('event_changes', responseHandler);
+}
+
+export function deleteEvent(req, res, next) {
+
+    let { userID, eventID } = req.body;
+
+    userID = parseInt(userID);
+    eventID = parseInt(eventID)
+
+    try {
+        if (userID.toString().trim() === "") {
+            res.status(400).json({
+                message: "Une erreur est survenue",
+                error: "Il manque l'id de l'utilisateur"
+            });
+        } else if (!userModel.findOne({ id: userID })) {
+            res.status(400).json({
+                message: "Une erreur est survenue",
+                error: "L'utilisateur n'existe pas"
+            });
+        } else if (!eventModel.findOne({ id: eventID })) {
+            res.status(400).json({
+                message: "Une erreur est survenue",
+                error: "L'événement n'existe pas"
+            });
+        } else {
+            eventModel.removeById(eventID);
+ 
+            eventEmitter.emit('event_changes', { type: "DELETE", eventID });
+
+            res.status(200).json({
+                message: "Evénement supprimé avec succès",
+            });
+        } 
+    } catch (error) {
+        res.status(400).json({
+            message: "Une erreur est survenue",
+            error: error.message
+        });
+    }
 }

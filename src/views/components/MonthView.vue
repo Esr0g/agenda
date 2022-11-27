@@ -18,66 +18,69 @@
             <td class="border-y border-l border-[#d1d5db] text-center w-1/7 font-bold">Dimanche</td>
         </tr>
         <tr>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[0].date)" data-modal-toggle="defaultModal">{{ cases[0].num }}</span><div id="emp-0" class="emp"></div></td>
-            <td id="case-1" class="border border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[1].date)">{{ cases[1].num }}</span><div id="emp-1" class="emp"></div></td>
-            <td id="case-2" class="border border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[2].date)">{{ cases[2].num }}</span><div id="emp-2" class="emp"></div></td>
-            <td id="case-3" class="border border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[3].date)">{{ cases[3].num }}</span><div id="emp-3" class="emp"></div></td>
-            <td id="case-4" class="border border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[4].date)">{{ cases[4].num }}</span><div id="emp-4" class="emp"></div></td>
-            <td id="case-5" class="border border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[5].date)">{{ cases[5].num }}</span><div id="emp-5" class="emp"></div></td>
-            <td id="case-6" class="border-y border-l border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[6].date)">{{ cases[6].num }}</span><div id="emp-6" class="emp"></div></td>
+            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[0].date)" data-modal-toggle="defaultModal">{{ cases[0].num }}</span><div id="emp-0" class="emp"></div></td>
+            <td id="case-1" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[1].date)">{{ cases[1].num }}</span><div id="emp-1" class="emp"></div></td>
+            <td id="case-2" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[2].date)">{{ cases[2].num }}</span><div id="emp-2" class="emp"></div></td>
+            <td id="case-3" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[3].date)">{{ cases[3].num }}</span><div id="emp-3" class="emp"></div></td>
+            <td id="case-4" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[4].date)">{{ cases[4].num }}</span><div id="emp-4" class="emp"></div></td>
+            <td id="case-5" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[5].date)">{{ cases[5].num }}</span><div id="emp-5" class="emp"></div></td>
+            <td id="case-6" class="border-y border-l border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[6].date)">{{ cases[6].num }}</span><div id="emp-6" class="emp"></div></td>
         </tr>
         <tr>
-            <td id="case-7" class="border-y border-r border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[7].date)">{{ cases[7].num }}</span><div id="emp-7" class="emp"></div></td>
-            <td id="case-8" class="border border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[8].date)">{{ cases[8].num }}</span><div id="emp-8" class="emp"></div></td>
-            <td id="case-9" class="border border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[9].date)">{{ cases[9].num }}</span><div id="emp-9" class="emp"></div></td>
-            <td id="case-10" class="border border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[10].date)">{{ cases[10].num }}</span><div id="emp-10" class="emp"></div></td>
-            <td id="case-11" class="border border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[11].date)">{{ cases[11].num }}</span><div id="emp-11" class="emp"></div></td>
-            <td id="case-12" class="border border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[12].date)">{{ cases[12].num }}</span><div id="emp-12" class="emp"></div></td>
-            <td id="case-13" class="border-y border-l border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[13].date)">{{ cases[13].num }}</span><div id="emp-13" class="emp"></div></td>
+            <td id="case-7" class="border-y border-r border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[7].date)">{{ cases[7].num }}</span><div id="emp-7" class="emp"></div></td>
+            <td id="case-8" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[8].date)">{{ cases[8].num }}</span><div id="emp-8" class="emp"></div></td>
+            <td id="case-9" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[9].date)">{{ cases[9].num }}</span><div id="emp-9" class="emp"></div></td>
+            <td id="case-10" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[10].date)">{{ cases[10].num }}</span><div id="emp-10" class="emp"></div></td>
+            <td id="case-11" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[11].date)">{{ cases[11].num }}</span><div id="emp-11" class="emp"></div></td>
+            <td id="case-12" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[12].date)">{{ cases[12].num }}</span><div id="emp-12" class="emp"></div></td>
+            <td id="case-13" class="border-y border-l border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[13].date)">{{ cases[13].num }}</span><div id="emp-13" class="emp"></div></td>
         </tr>
         <tr>
-            <td id="case-14" class="border-y border-r border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[14].date)">{{ cases[14].num }}</span><div id="emp-14" class="emp"></div></td>
-            <td id="case-15" class="border border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[15].date)">{{ cases[15].num }}</span><div id="emp-15" class="emp"></div></td>
-            <td id="case-16" class="border border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[16].date)">{{ cases[16].num }}</span><div id="emp-16" class="emp"></div></td>
-            <td id="case-17" class="border border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[17].date)">{{ cases[17].num }}</span><div id="emp-17" class="emp"></div></td>
-            <td id="case-18" class="border border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[18].date)">{{ cases[18].num }}</span><div id="emp-18" class="emp"></div></td>
-            <td id="case-19" class="border border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[19].date)">{{ cases[19].num }}</span><div id="emp-19" class="emp"></div></td>
-            <td id="case-20" class="border-y border-l border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[20].date)">{{ cases[20].num }}</span><div id="emp-20" class="emp"></div></td>
+            <td id="case-14" class="border-y border-r border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[14].date)">{{ cases[14].num }}</span><div id="emp-14" class="emp"></div></td>
+            <td id="case-15" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[15].date)">{{ cases[15].num }}</span><div id="emp-15" class="emp"></div></td>
+            <td id="case-16" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[16].date)">{{ cases[16].num }}</span><div id="emp-16" class="emp"></div></td>
+            <td id="case-17" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[17].date)">{{ cases[17].num }}</span><div id="emp-17" class="emp"></div></td>
+            <td id="case-18" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[18].date)">{{ cases[18].num }}</span><div id="emp-18" class="emp"></div></td>
+            <td id="case-19" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[19].date)">{{ cases[19].num }}</span><div id="emp-19" class="emp"></div></td>
+            <td id="case-20" class="border-y border-l border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[20].date)">{{ cases[20].num }}</span><div id="emp-20" class="emp"></div></td>
         </tr>
         <tr>
-            <td id="case-21" class="border-y border-r border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[21].date)">{{ cases[21].num }}</span><div id="emp-21" class="emp"></div></td>
-            <td id="case-22" class="border border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[22].date)">{{ cases[22].num }}</span><div id="emp-22" class="emp"></div></td>
-            <td id="case-23" class="border border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[23].date)">{{ cases[23].num }}</span><div id="emp-23" class="emp"></div></td>
-            <td id="case-24" class="border border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[24].date)">{{ cases[24].num }}</span><div id="emp-24" class="emp"></div></td>
-            <td id="case-25" class="border border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[25].date)">{{ cases[25].num }}</span><div id="emp-25" class="emp"></div></td>
-            <td id="case-26" class="border border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[26].date)">{{ cases[26].num }}</span><div id="emp-26" class="emp"></div></td>
-            <td id="case-27" class="border-y border-l border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[27].date)">{{ cases[27].num }}</span><div id="emp-27" class="emp"></div></td>
+            <td id="case-21" class="border-y border-r border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[21].date)">{{ cases[21].num }}</span><div id="emp-21" class="emp"></div></td>
+            <td id="case-22" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[22].date)">{{ cases[22].num }}</span><div id="emp-22" class="emp"></div></td>
+            <td id="case-23" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[23].date)">{{ cases[23].num }}</span><div id="emp-23" class="emp"></div></td>
+            <td id="case-24" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[24].date)">{{ cases[24].num }}</span><div id="emp-24" class="emp"></div></td>
+            <td id="case-25" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[25].date)">{{ cases[25].num }}</span><div id="emp-25" class="emp"></div></td>
+            <td id="case-26" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[26].date)">{{ cases[26].num }}</span><div id="emp-26" class="emp"></div></td>
+            <td id="case-27" class="border-y border-l border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[27].date)">{{ cases[27].num }}</span><div id="emp-27" class="emp"></div></td>
         </tr>
         <tr>
-            <td id="case-28" class="border-t border-r border-b border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[28].date)">{{ cases[28].num }}</span><div id="emp-28" class="emp"></div></td>
-            <td id="case-29" class="border border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[29].date)">{{ cases[29].num }}</span><div id="emp-29" class="emp"></div></td>
-            <td id="case-30" class="border border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[30].date)">{{ cases[30].num }}</span><div id="emp-30" class="emp"></div></td>
-            <td id="case-31" class="border border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[31].date)">{{ cases[31].num }}</span><div id="emp-31" class="emp"></div></td>
-            <td id="case-32" class="border border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[32].date)">{{ cases[32].num }}</span><div id="emp-32" class="emp"></div></td>
-            <td id="case-33" class="border border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[33].date)">{{ cases[33].num }}</span><div id="emp-33" class="emp"></div></td>
-            <td id="case-34" class="border-t border-l border-b border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[34].date)">{{ cases[34].num }}</span><div id="emp-34" class="emp"></div></td>
+            <td id="case-28" class="border-t border-r border-b border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[28].date)">{{ cases[28].num }}</span><div id="emp-28" class="emp"></div></td>
+            <td id="case-29" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[29].date)">{{ cases[29].num }}</span><div id="emp-29" class="emp"></div></td>
+            <td id="case-30" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[30].date)">{{ cases[30].num }}</span><div id="emp-30" class="emp"></div></td>
+            <td id="case-31" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[31].date)">{{ cases[31].num }}</span><div id="emp-31" class="emp"></div></td>
+            <td id="case-32" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[32].date)">{{ cases[32].num }}</span><div id="emp-32" class="emp"></div></td>
+            <td id="case-33" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[33].date)">{{ cases[33].num }}</span><div id="emp-33" class="emp"></div></td>
+            <td id="case-34" class="border-t border-l border-b border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[34].date)">{{ cases[34].num }}</span><div id="emp-34" class="emp"></div></td>
         </tr>
         <tr>
-            <td id="case-35" class="border-t border-r border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[35].date)">{{ cases[35].num }}</span><div id="emp-35" class="emp"></div></td>
-            <td id="case-36" class="border-t border-r border-l border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[36].date)">{{ cases[36].num }}</span><div id="emp-36" class="emp"></div></td>
-            <td id="case-37" class="border-t border-r border-l border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[37].date)">{{ cases[37].num }}</span><div id="emp-37" class="emp"></div></td>
-            <td id="case-38" class="border-t border-r border-l border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[38].date)">{{ cases[38].num }}</span><div id="emp-38" class="emp"></div></td>
-            <td id="case-39" class="border-t border-r border-l border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[39].date)">{{ cases[39].num }}</span><div id="emp-39" class="emp"></div></td>
-            <td id="case-40" class="border-t border-r border-l border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[40].date)">{{ cases[40].num }}</span><div id="emp-40" class="emp"></div></td>
-            <td id="case-41" class="border-t border-l border-[#d1d5db] h-28"><span class="num" @click="addEvent(cases[41].date)">{{ cases[41].num }}</span><div id="emp-41" class="emp"></div></td>
+            <td id="case-35" class="border-t border-r border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[35].date)">{{ cases[35].num }}</span><div id="emp-35" class="emp"></div></td>
+            <td id="case-36" class="border-t border-r border-l border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[36].date)">{{ cases[36].num }}</span><div id="emp-36" class="emp"></div></td>
+            <td id="case-37" class="border-t border-r border-l border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[37].date)">{{ cases[37].num }}</span><div id="emp-37" class="emp"></div></td>
+            <td id="case-38" class="border-t border-r border-l border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[38].date)">{{ cases[38].num }}</span><div id="emp-38" class="emp"></div></td>
+            <td id="case-39" class="border-t border-r border-l border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[39].date)">{{ cases[39].num }}</span><div id="emp-39" class="emp"></div></td>
+            <td id="case-40" class="border-t border-r border-l border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[40].date)">{{ cases[40].num }}</span><div id="emp-40" class="emp"></div></td>
+            <td id="case-41" class="border-t border-l border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[41].date)">{{ cases[41].num }}</span><div id="emp-41" class="emp"></div></td>
         </tr>
     </table>
     <div class="w-full p-4"></div>
     <AddEventModal v-if="showAddEventModal" :date="dateSelected" @close="closeModal"/>
+    <ShowEventModal v-if="showShowEventModal" :event="event" @close="closeModal"/>
 </template>
 
 <script>
 import AddEventModal from './AddEventModal.vue';
+import ShowEventModal from "./ShowEventModal.vue";
+import _ from 'underscore';
 const mois = ["Janvier", "Février", "Mars", "Avril", "Mais", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre"];
 const jours = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
 export default {
@@ -88,8 +91,10 @@ export default {
             date: null,
             cases: [],
             showAddEventModal: false,
+            showShowEventModal: false,
             dateSelected: null,
-            events: []
+            events: [],
+            event: null
         };
     },
 
@@ -194,13 +199,17 @@ export default {
                 moisS = moisS.add(1, "day");
             }
 
+            this.clearAllEvent();
+            this.getAllEvent();
+        },
+
+        clearAllEvent() {
             for (let i = 0; i < 42; i++) {
                 let elem = document.querySelector("#emp-" + i);
                 while (elem.hasChildNodes()) {
                     elem.removeChild(elem.firstChild);
                 }
             }
-            this.getAllEvent();
         },
 
         previousMonth() {
@@ -238,6 +247,7 @@ export default {
 
         closeModal(val) {
             this.showAddEventModal = val;
+            this.showShowEventModal = val;
         },
 
         getUserId() {
@@ -252,7 +262,12 @@ export default {
 
                 for (let evt of this.events) {
                     let date2 = this.$dayjs(evt.dateDeb);
-                    if (date1.isSame(date2, 'day')) {
+                    let date3 = null;
+                    if (evt.dateFin) {
+                        date3 = this.$dayjs(evt.dateFin);
+                    }
+
+                    if (date1.isSame(date2, 'day') || (date3 && date1.isBefore(date3) && date1.isAfter(date2) || (date3 && date1.isSame(date3)))) {
                         let cellule = document.querySelector('#emp-' + i);
 
                         if (cellule.children.length < 3) {
@@ -269,13 +284,15 @@ export default {
                             element.style.paddingRight = "0.2rem";
                             element.style.color = "#203d68";
                             element.style.cursor = "pointer"
-                            element.addEventListener("click", null);
+                            element.addEventListener("click", () => {
+                                this.afficheEvt(evt);
+                            });
                             
                             let text1 = document.createTextNode(evt.name);
                             let text2 = document.createTextNode(date2.format("H:mm"));
     
                             let child1 = document.createElement('div');
-                            child1.style.maxWidth = "70%";
+                            child1.style.maxWidth = "60%";
                             child1.style.overflow = "hidden";
                             child1.style.textOverflow = "ellipsis";
                             child1.style.whiteSpace = "nowrap";
@@ -288,6 +305,23 @@ export default {
                             element.appendChild(child1);
                             element.appendChild(child2);
                             cellule.appendChild(element);
+                        } else {
+                            cellule.removeChild(cellule.lastChild);
+                            let element = document.createElement('div')
+                            element.style.textAlign = "center";
+                            element.style.maxWidth = "100%";
+                            element.style.border = "2px #ceeafa solid";
+                            element.style.borderRadius = "8px";
+                            element.style.margin = "0.1rem 0.2rem 0.1rem 0.2rem";
+                            element.style.backgroundColor = "#ebf8ff";
+                            element.style.paddingLeft = "0.2rem";
+                            element.style.paddingRight = "0.2rem";
+                            element.style.color = "#203d68";
+                            let text = document.createTextNode("...");
+                            element.appendChild(text);
+                            cellule.append(element);
+
+                            //TODO ajouter un venet sur le clic pour ammener à la vue du jour cliqué
                         }
                     }
                 }
@@ -300,26 +334,38 @@ export default {
                 url: '/api/auth/getEventUpdate'
             }).then((res) => {
 
-                if (res.data.dateDeb) {
-                    for (let i = 0; i < 42; i++) {
-                        let elem = document.querySelector("#emp-" + i);
-                        while (elem.hasChildNodes()) {
-                            elem.removeChild(elem.firstChild);
+                if (res.data.type === "ADD") {
+                    if (res.data.event.dateDeb) {
+                        for (let i = 0; i < 42; i++) {
+                            let elem = document.querySelector("#emp-" + i);
+                            while (elem.hasChildNodes()) {
+                                elem.removeChild(elem.firstChild);
+                            }
                         }
+                        this.events.push(res.data.event);
+                        this.clearAllEvent();
+                        this.afficherEvents();
                     }
-                    this.events.push(res.data);
+                } else if (res.data.type === "DELETE") {
+                    this.events = _.reject(this.events, (e) => e.id == res.data.eventID);
+                    this.clearAllEvent();
                     this.afficherEvents();
                 }
+                
 
 
                 setTimeout(this.updateEvents, 500);
             }).catch((err) => {
                 setTimeout(this.updateEvents(), 500);
             })
+        },
 
+        afficheEvt(evt) {
+            this.event = evt;
+            this.showShowEventModal = true;
         }
     },
-    components: { AddEventModal }
+    components: { AddEventModal, ShowEventModal }
 }
 </script>
 

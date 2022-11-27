@@ -1,7 +1,7 @@
 'use strict';
 import express from 'express';
 import { deleteUser, logout } from "../middelware/auth.js";
-import { addEvent, getEventParam, getEventUpdate } from '../middelware/myEventManager.js';
+import { addEvent, getEventParam, getEventUpdate, deleteEvent } from '../middelware/myEventManager.js';
 
 let router = express.Router();
 
@@ -12,5 +12,6 @@ router.get('/logout', logout);
 router.post('/addEvent', addEvent);
 router.get('/getEventParam', getEventParam);
 router.get('/getEventUpdate', getEventUpdate);
+router.delete('/deleteEvent', deleteEvent);
 
 export { router };
