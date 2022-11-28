@@ -37,7 +37,7 @@ export default {
             weekSelected: false,
             daySelected: false,
             views: [MonthView, WeekView, DayView],
-            currentComponent: MonthView
+            currentComponent: MonthView,
         } 
     },
 

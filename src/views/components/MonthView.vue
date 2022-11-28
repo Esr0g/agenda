@@ -74,13 +74,16 @@
     </table>
     <div class="w-full p-4"></div>
     <AddEventModal v-if="showAddEventModal" :date="dateSelected" @close="closeModal"/>
-    <ShowEventModal v-if="showShowEventModal" :event="event" @close="closeModal"/>
+    <ShowEventModal v-if="showShowEventModal" :event="event" @close="closeModal" @modify="updateEvent"/>
+    <UpdateEventModal v-if="showUpdateEventModal" :event="event" @close="closeModal"/>
 </template>
 
 <script>
 import AddEventModal from './AddEventModal.vue';
 import ShowEventModal from "./ShowEventModal.vue";
+import UpdateEventModal from './UpdateEventModal.vue';
 import _ from 'underscore';
+
 const mois = ["Janvier", "Février", "Mars", "Avril", "Mais", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre"];
 const jours = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
 export default {
@@ -92,6 +95,7 @@ export default {
             cases: [],
             showAddEventModal: false,
             showShowEventModal: false,
+            showUpdateEventModal: false,
             dateSelected: null,
             events: [],
             event: null
@@ -248,6 +252,7 @@ export default {
         closeModal(val) {
             this.showAddEventModal = val;
             this.showShowEventModal = val;
+            this.showUpdateEventModal = val;
         },
 
         getUserId() {
@@ -321,7 +326,7 @@ export default {
                             element.appendChild(text);
                             cellule.append(element);
 
-                            //TODO ajouter un venet sur le clic pour ammener à la vue du jour cliqué
+                            //TODO 
                         }
                     }
                 }
@@ -335,37 +340,39 @@ export default {
             }).then((res) => {
 
                 if (res.data.type === "ADD") {
-                    if (res.data.event.dateDeb) {
-                        for (let i = 0; i < 42; i++) {
-                            let elem = document.querySelector("#emp-" + i);
-                            while (elem.hasChildNodes()) {
-                                elem.removeChild(elem.firstChild);
-                            }
-                        }
-                        this.events.push(res.data.event);
-                        this.clearAllEvent();
-                        this.afficherEvents();
-                    }
+                    this.events.push(res.data.event);
+                    this.clearAllEvent();
+                    this.afficherEvents();
                 } else if (res.data.type === "DELETE") {
                     this.events = _.reject(this.events, (e) => e.id == res.data.eventID);
                     this.clearAllEvent();
                     this.afficherEvents();
+                } else if (res.data.type === "MODIFY") {
+                    this.events = _.reject(this.events, (e) => e.id == res.data.oldId);
+                    this.events.push(res.data.event);
+                    this.clearAllEvent();
+                    this.afficherEvents();
                 }
-                
+
 
 
                 setTimeout(this.updateEvents, 500);
             }).catch((err) => {
                 setTimeout(this.updateEvents(), 500);
-            })
+            });
         },
 
         afficheEvt(evt) {
             this.event = evt;
             this.showShowEventModal = true;
+        },
+
+        updateEvent(evt) {
+            this.event = evt;
+            this.showUpdateEventModal = true;
         }
     },
-    components: { AddEventModal, ShowEventModal }
+    components: { AddEventModal, ShowEventModal, UpdateEventModal }
 }
 </script>
 

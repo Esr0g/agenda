@@ -105,7 +105,6 @@ export default {
                     this.$emit('close', true);
                     this.$router.push('/');
                 }).catch((err) => {
-                    console.log(err);
                     const info = err.response.data;
                     if (info.message && info.error) {
                         this.$emit('error', info.message + " : " + info.error);

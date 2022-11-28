@@ -159,3 +159,44 @@ export function deleteEvent(req, res, next) {
         });
     }
 }
+
+export function modifyEvent(req, res, next) {
+    let { userID, dateDeb, dateFin, name, adresse, description, allDay, id } = req.body;
+
+    try {
+        if (userID.toString().trim() === "") {
+            res.status(400).json({
+                message: "Une erreur est survenue",
+                error: "Il manque l'id de l'utilisateur"
+            });
+        } else if (!userModel.findOne({ id: userID })) {
+            res.status(400).json({
+                message: "Une erreur est survenue",
+                error: "L'utilisateur n'existe pas"
+            });
+        } else if (!eventModel.findOne({ id })) {
+            res.status(400).json({
+                message: "Une erreur est survenue",
+                error: "L'événement n'existe pas"
+            });
+        } else {
+            
+            eventModel.removeById(id);
+            let event = eventModel.add(eventModel.createEvent(userID, dateDeb, dateFin, name, adresse, description, allDay));
+
+            eventEmitter.emit('event_changes', { event, type: "MODIFY", oldId: id });
+
+            res.status(200).json({
+                message: "Evénement modifié avec succès",
+                event
+            });
+
+            next();
+        }
+    } catch (err) {
+        res.status(400).json({
+            message: "Une erreur est survenue",
+            error: err.message
+        });
+    }
+}

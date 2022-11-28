@@ -15,15 +15,15 @@
                     </button>
                 </div>
                 <!-- Modal body -->
-                <div class="p-4 space-y-4">
-                    <h4><b>Début : </b></h4>
-                    <p>{{ getDateDebut() }}</p>
-                    <h4><b>Fin : </b></h4>
-                    <p>{{ getDateFin() }}</p>
-                    <h4><b>Lieu : </b></h4>
-                    <p>{{ event.adresse }}</p>
-                    <h4><b>Description : </b></h4>
-                    <p>{{ event.description }}</p>
+                <div class="grid p-4 grid-cols-[25%_auto] gap-y-8 gap-x-10 my-6">
+                    <h4 class="block justify-self-end"><b>Début : </b></h4>
+                    <p class="block">{{ getDateDebut() }}</p>
+                    <h4 class="block justify-self-end"><b>Fin : </b></h4>
+                    <p class="block">{{ getDateFin() }}</p>
+                    <h4 class="block justify-self-end"><b>Lieu : </b></h4>
+                    <p class="block">{{ event.adresse }}</p>
+                    <h4 class="block justify-self-end"><b>Description : </b></h4>
+                    <p class="block">{{ event.description }}</p>
                 </div>
                 <!-- Modal footer -->
                 <div class="flex items-center p-4 space-x-6 rounded-b border-t border-gray-200 dark:border-gray-600">
@@ -36,61 +36,70 @@
     </div>
     <div class="fixed h-screen w-screen top-0 right-0 left-0 z-49" id="shadow">
     </div>
-    </template>
+</template>
     
-    <script>
-    const mois = ["Janvier", "Février", "Mars", "Avril", "Mais", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre"];
+<script>
+const mois = ["Janvier", "Février", "Mars", "Avril", "Mais", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre"];
 const jours = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
-    
-    export default {
-        name: 'ShowEventModal',
-        data() {
-            return {
-            };
+
+export default {
+    name: 'ShowEventModal',
+    data() {
+        return {
+        };
+    },
+
+    props: {
+        event: Object
+    },
+
+    methods: {
+        hidde() {
+            this.$emit('close', false);
         },
-    
-        props: {
-            event: Object
+
+        getUserId() {
+            let cookies = document.cookie.split("=");
+            let user = JSON.parse(cookies[1]);
+            return user.id;
         },
-    
-        methods: {
-            hidde() {
-                this.$emit('close', false);
-            },
 
-            getUserId() {
-                let cookies = document.cookie.split("=");
-                let user = JSON.parse(cookies[1]);
-                return user.id;
-            },
+        deleteEvent() {
+            this.$http({
+                method: 'delete',
+                url: '/api/auth/deleteEvent',
+                data: { userID: this.getUserId() ,eventID: this.event.id }
+            }).then((res) => {
+                this.hidde();
+            }).catch((err) => {
+                console.err(err);
+            })
+        },
 
-            deleteEvent() {
-                this.$http({
-                    method: 'delete',
-                    url: '/api/auth/deleteEvent',
-                    data: { userID: this.getUserId() ,eventID: this.event.id }
-                }).then((res) => {
-                    this.hidde();
-                }).catch((err) => {
-                    console.err(err);
-                })
-            },
+        getDateDebut() {
+            let date = this.$dayjs(this.event.dateDeb);
+            return jours[date.day()] + " " + date.date() + " " + mois[date.month()] + " " + date.year()
+                + " à " + date.format("H:MM");
+        },
 
-            getDateDebut() {
-                console.log(this.event);
-                let date = this.$dayjs(this.event.dateDeb);
-                return jours[date.day()] + " " + date.date() + " " + mois[date.month()] + " " + date.year()
-                    + " à " + date.format("H:MM");
-            },
-
-            getDateFin() {
+        getDateFin() {
+            if (!this.event.allDay) {
                 let date = this.$dayjs(this.event.dateFin);
                 return jours[date.day()] + " " + date.date() + " " + mois[date.month()] + " " + date.year()
                     + " à " + date.format("H:MM");
+            } else {
+                return "";
             }
+            
+        },
+
+        modifiyEvent() {
+            this.hidde();
+            this.$emit('modify', this.event);
         }
     }
-    </script>
+}
+</script>
     
     <style scoped>
     #defaultModal {
