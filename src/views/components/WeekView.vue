@@ -1,5 +1,9 @@
 <template >
     <table class="m-auto mt-10 bg-[#f9fafb] w-5/6">
+        <thead>
+
+
+
         <tr>
             <td @click="previousWeek" class="p-2">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -25,1034 +29,19 @@
                         d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
                 </svg></td>
         </tr>
-        <tr class="bg-white">
-            <th class="border-y border-r border-[#d1d5db] text-center w-1/7 font-bold">Horaires</th>
-            <th class="border-y border-r border-[#d1d5db] text-center w-1/7 font-bold">Lundi</th>
-            <th class="border border-[#d1d5db] text-center w-1/7 font-bold">Mardi</th>
-            <th class="border border-[#d1d5db] text-center w-1/7 font-bold">Mercredi</th>
-            <th class="border border-[#d1d5db] text-center w-1/7 font-bold">Jeudi</th>
-            <th class="border border-[#d1d5db] text-center w-1/7 font-bold">Vendredi</th>
-            <th class="border border-[#d1d5db] text-center w-1/7 font-bold">Samedi</th>
-            <th class="border-y border-l border-[#d1d5db] text-center w-1/7 font-bold">Dimanche</th>
+        <tr id="table-days" class="bg-white">
+
         </tr>
-        <tr>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    data-modal-toggle="defaultModal">{{ "00:00" }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-1" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[0].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-1" class="emp"></div>
-            </td>
-            <td id="case-2" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[1].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-2" class="emp"></div>
-            </td>
-            <td id="case-3" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[2].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-3" class="emp"></div>
-            </td>
-            <td id="case-4" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[3].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-4" class="emp"></div>
-            </td>
-            <td id="case-5" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[4].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-5" class="emp"></div>
-            </td>
-            <td id="case-6" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[5].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-6" class="emp"></div>
-            </td>
-            <td id="case-7" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[6].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-7" class="emp"></div>
-            </td>
-        </tr>
-        <tr>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    data-modal-toggle="defaultModal">{{ "01:00" }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-1" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[0].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-1" class="emp"></div>
-            </td>
-            <td id="case-2" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[1].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-2" class="emp"></div>
-            </td>
-            <td id="case-3" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[2].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-3" class="emp"></div>
-            </td>
-            <td id="case-4" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[3].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-4" class="emp"></div>
-            </td>
-            <td id="case-5" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[4].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-5" class="emp"></div>
-            </td>
-            <td id="case-6" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[5].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-6" class="emp"></div>
-            </td>
-            <td id="case-7" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[6].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-7" class="emp"></div>
-            </td>
-        </tr>
-        <tr>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    data-modal-toggle="defaultModal">{{ "02:00" }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-1" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[0].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-1" class="emp"></div>
-            </td>
-            <td id="case-2" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[1].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-2" class="emp"></div>
-            </td>
-            <td id="case-3" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[2].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-3" class="emp"></div>
-            </td>
-            <td id="case-4" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[3].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-4" class="emp"></div>
-            </td>
-            <td id="case-5" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[4].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-5" class="emp"></div>
-            </td>
-            <td id="case-6" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[5].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-6" class="emp"></div>
-            </td>
-            <td id="case-7" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[6].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-7" class="emp"></div>
-            </td>
-        </tr>
-        <tr>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    data-modal-toggle="defaultModal">{{ "03:00" }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-1" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[0].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-1" class="emp"></div>
-            </td>
-            <td id="case-2" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[1].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-2" class="emp"></div>
-            </td>
-            <td id="case-3" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[2].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-3" class="emp"></div>
-            </td>
-            <td id="case-4" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[3].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-4" class="emp"></div>
-            </td>
-            <td id="case-5" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[4].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-5" class="emp"></div>
-            </td>
-            <td id="case-6" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[5].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-6" class="emp"></div>
-            </td>
-            <td id="case-7" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[6].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-7" class="emp"></div>
-            </td>
-        </tr>
-        <tr>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    data-modal-toggle="defaultModal">{{ "04:00" }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-1" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[0].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-1" class="emp"></div>
-            </td>
-            <td id="case-2" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[1].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-2" class="emp"></div>
-            </td>
-            <td id="case-3" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[2].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-3" class="emp"></div>
-            </td>
-            <td id="case-4" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[3].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-4" class="emp"></div>
-            </td>
-            <td id="case-5" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[4].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-5" class="emp"></div>
-            </td>
-            <td id="case-6" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[5].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-6" class="emp"></div>
-            </td>
-            <td id="case-7" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[6].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-7" class="emp"></div>
-            </td>
-        </tr>
-        <tr>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    data-modal-toggle="defaultModal">{{ "05:00" }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-1" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[0].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-1" class="emp"></div>
-            </td>
-            <td id="case-2" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[1].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-2" class="emp"></div>
-            </td>
-            <td id="case-3" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[2].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-3" class="emp"></div>
-            </td>
-            <td id="case-4" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[3].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-4" class="emp"></div>
-            </td>
-            <td id="case-5" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[4].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-5" class="emp"></div>
-            </td>
-            <td id="case-6" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[5].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-6" class="emp"></div>
-            </td>
-            <td id="case-7" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[6].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-7" class="emp"></div>
-            </td>
-        </tr>
-        <tr>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    data-modal-toggle="defaultModal">{{ "06:00" }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-1" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[0].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-1" class="emp"></div>
-            </td>
-            <td id="case-2" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[1].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-2" class="emp"></div>
-            </td>
-            <td id="case-3" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[2].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-3" class="emp"></div>
-            </td>
-            <td id="case-4" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[3].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-4" class="emp"></div>
-            </td>
-            <td id="case-5" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[4].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-5" class="emp"></div>
-            </td>
-            <td id="case-6" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[5].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-6" class="emp"></div>
-            </td>
-            <td id="case-7" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[6].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-7" class="emp"></div>
-            </td>
-        </tr>
-        <tr>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    data-modal-toggle="defaultModal">{{ "07:00" }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-1" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[0].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-1" class="emp"></div>
-            </td>
-            <td id="case-2" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[1].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-2" class="emp"></div>
-            </td>
-            <td id="case-3" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[2].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-3" class="emp"></div>
-            </td>
-            <td id="case-4" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[3].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-4" class="emp"></div>
-            </td>
-            <td id="case-5" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[4].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-5" class="emp"></div>
-            </td>
-            <td id="case-6" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[5].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-6" class="emp"></div>
-            </td>
-            <td id="case-7" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[6].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-7" class="emp"></div>
-            </td>
-        </tr>
-        <tr>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    data-modal-toggle="defaultModal">{{ "08:00" }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-1" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[0].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-1" class="emp"></div>
-            </td>
-            <td id="case-2" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[1].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-2" class="emp"></div>
-            </td>
-            <td id="case-3" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[2].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-3" class="emp"></div>
-            </td>
-            <td id="case-4" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[3].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-4" class="emp"></div>
-            </td>
-            <td id="case-5" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[4].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-5" class="emp"></div>
-            </td>
-            <td id="case-6" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[5].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-6" class="emp"></div>
-            </td>
-            <td id="case-7" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[6].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-7" class="emp"></div>
-            </td>
-        </tr>
-        <tr>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    data-modal-toggle="defaultModal">{{ "09:00" }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-1" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[0].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-1" class="emp"></div>
-            </td>
-            <td id="case-2" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[1].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-2" class="emp"></div>
-            </td>
-            <td id="case-3" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[2].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-3" class="emp"></div>
-            </td>
-            <td id="case-4" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[3].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-4" class="emp"></div>
-            </td>
-            <td id="case-5" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[4].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-5" class="emp"></div>
-            </td>
-            <td id="case-6" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[5].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-6" class="emp"></div>
-            </td>
-            <td id="case-7" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[6].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-7" class="emp"></div>
-            </td>
-        </tr>
-        <tr>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    data-modal-toggle="defaultModal">{{ "10:00" }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-1" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[0].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-1" class="emp"></div>
-            </td>
-            <td id="case-2" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[1].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-2" class="emp"></div>
-            </td>
-            <td id="case-3" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[2].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-3" class="emp"></div>
-            </td>
-            <td id="case-4" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[3].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-4" class="emp"></div>
-            </td>
-            <td id="case-5" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[4].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-5" class="emp"></div>
-            </td>
-            <td id="case-6" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[5].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-6" class="emp"></div>
-            </td>
-            <td id="case-7" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[6].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-7" class="emp"></div>
-            </td>
-        </tr>
-        <tr>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    data-modal-toggle="defaultModal">{{ "11:00" }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-1" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[0].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-1" class="emp"></div>
-            </td>
-            <td id="case-2" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[1].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-2" class="emp"></div>
-            </td>
-            <td id="case-3" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[2].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-3" class="emp"></div>
-            </td>
-            <td id="case-4" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[3].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-4" class="emp"></div>
-            </td>
-            <td id="case-5" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[4].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-5" class="emp"></div>
-            </td>
-            <td id="case-6" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[5].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-6" class="emp"></div>
-            </td>
-            <td id="case-7" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[6].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-7" class="emp"></div>
-            </td>
-        </tr>
-        <tr>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    data-modal-toggle="defaultModal">{{ "12:00" }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-1" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[0].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-1" class="emp"></div>
-            </td>
-            <td id="case-2" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[1].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-2" class="emp"></div>
-            </td>
-            <td id="case-3" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[2].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-3" class="emp"></div>
-            </td>
-            <td id="case-4" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[3].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-4" class="emp"></div>
-            </td>
-            <td id="case-5" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[4].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-5" class="emp"></div>
-            </td>
-            <td id="case-6" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[5].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-6" class="emp"></div>
-            </td>
-            <td id="case-7" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[6].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-7" class="emp"></div>
-            </td>
-        </tr>
-        <tr>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                   data-modal-toggle="defaultModal">{{ "13:00" }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-1" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[0].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-1" class="emp"></div>
-            </td>
-            <td id="case-2" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[1].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-2" class="emp"></div>
-            </td>
-            <td id="case-3" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[2].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-3" class="emp"></div>
-            </td>
-            <td id="case-4" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[3].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-4" class="emp"></div>
-            </td>
-            <td id="case-5" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[4].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-5" class="emp"></div>
-            </td>
-            <td id="case-6" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[5].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-6" class="emp"></div>
-            </td>
-            <td id="case-7" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[6].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-7" class="emp"></div>
-            </td>
-        </tr>
-        <tr>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    data-modal-toggle="defaultModal">{{ "14:00" }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-1" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[0].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-1" class="emp"></div>
-            </td>
-            <td id="case-2" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[1].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-2" class="emp"></div>
-            </td>
-            <td id="case-3" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[2].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-3" class="emp"></div>
-            </td>
-            <td id="case-4" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[3].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-4" class="emp"></div>
-            </td>
-            <td id="case-5" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[4].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-5" class="emp"></div>
-            </td>
-            <td id="case-6" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[5].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-6" class="emp"></div>
-            </td>
-            <td id="case-7" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[6].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-7" class="emp"></div>
-            </td>
-        </tr>
-        <tr>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    data-modal-toggle="defaultModal">{{ "15:00" }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-1" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[0].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-1" class="emp"></div>
-            </td>
-            <td id="case-2" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[1].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-2" class="emp"></div>
-            </td>
-            <td id="case-3" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[2].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-3" class="emp"></div>
-            </td>
-            <td id="case-4" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[3].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-4" class="emp"></div>
-            </td>
-            <td id="case-5" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[4].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-5" class="emp"></div>
-            </td>
-            <td id="case-6" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[5].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-6" class="emp"></div>
-            </td>
-            <td id="case-7" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[6].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-7" class="emp"></div>
-            </td>
-        </tr>
-        <tr>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    data-modal-toggle="defaultModal">{{ "16:00" }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-1" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[0].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-1" class="emp"></div>
-            </td>
-            <td id="case-2" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[1].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-2" class="emp"></div>
-            </td>
-            <td id="case-3" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[2].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-3" class="emp"></div>
-            </td>
-            <td id="case-4" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[3].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-4" class="emp"></div>
-            </td>
-            <td id="case-5" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[4].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-5" class="emp"></div>
-            </td>
-            <td id="case-6" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[5].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-6" class="emp"></div>
-            </td>
-            <td id="case-7" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[6].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-7" class="emp"></div>
-            </td>
-        </tr>
-        <tr>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    data-modal-toggle="defaultModal">{{ "17:00" }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-1" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[0].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-1" class="emp"></div>
-            </td>
-            <td id="case-2" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[1].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-2" class="emp"></div>
-            </td>
-            <td id="case-3" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[2].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-3" class="emp"></div>
-            </td>
-            <td id="case-4" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[3].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-4" class="emp"></div>
-            </td>
-            <td id="case-5" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[4].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-5" class="emp"></div>
-            </td>
-            <td id="case-6" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[5].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-6" class="emp"></div>
-            </td>
-            <td id="case-7" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[6].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-7" class="emp"></div>
-            </td>
-        </tr>
-        <tr>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    data-modal-toggle="defaultModal">{{ "18:00" }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-1" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[0].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-1" class="emp"></div>
-            </td>
-            <td id="case-2" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[1].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-2" class="emp"></div>
-            </td>
-            <td id="case-3" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[2].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-3" class="emp"></div>
-            </td>
-            <td id="case-4" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[3].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-4" class="emp"></div>
-            </td>
-            <td id="case-5" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[4].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-5" class="emp"></div>
-            </td>
-            <td id="case-6" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[5].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-6" class="emp"></div>
-            </td>
-            <td id="case-7" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[6].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-7" class="emp"></div>
-            </td>
-        </tr>
-        <tr>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    data-modal-toggle="defaultModal">{{ "19:00" }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-1" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[0].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-1" class="emp"></div>
-            </td>
-            <td id="case-2" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[1].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-2" class="emp"></div>
-            </td>
-            <td id="case-3" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[2].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-3" class="emp"></div>
-            </td>
-            <td id="case-4" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[3].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-4" class="emp"></div>
-            </td>
-            <td id="case-5" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[4].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-5" class="emp"></div>
-            </td>
-            <td id="case-6" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[5].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-6" class="emp"></div>
-            </td>
-            <td id="case-7" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[6].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-7" class="emp"></div>
-            </td>
-        </tr>
-        <tr>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    data-modal-toggle="defaultModal">{{ "20:00" }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-1" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[0].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-1" class="emp"></div>
-            </td>
-            <td id="case-2" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[1].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-2" class="emp"></div>
-            </td>
-            <td id="case-3" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[2].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-3" class="emp"></div>
-            </td>
-            <td id="case-4" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[3].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-4" class="emp"></div>
-            </td>
-            <td id="case-5" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[4].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-5" class="emp"></div>
-            </td>
-            <td id="case-6" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[5].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-6" class="emp"></div>
-            </td>
-            <td id="case-7" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[6].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-7" class="emp"></div>
-            </td>
-        </tr>
-        <tr>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    data-modal-toggle="defaultModal">{{ "21:00" }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-1" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[0].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-1" class="emp"></div>
-            </td>
-            <td id="case-2" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[1].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-2" class="emp"></div>
-            </td>
-            <td id="case-3" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[2].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-3" class="emp"></div>
-            </td>
-            <td id="case-4" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[3].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-4" class="emp"></div>
-            </td>
-            <td id="case-5" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[4].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-5" class="emp"></div>
-            </td>
-            <td id="case-6" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[5].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-6" class="emp"></div>
-            </td>
-            <td id="case-7" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[6].date)" data-modal-toggle="defaultModal"></span>
-                <div id="emp-7" class="emp"></div>
-            </td>
-        </tr>
-        <tr>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    data-modal-toggle="defaultModal">{{ "22:00" }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[0].date)" data-modal-toggle="defaultModal">{{ cases[0].num }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[1].date)" data-modal-toggle="defaultModal">{{ cases[1].num }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[2].date)" data-modal-toggle="defaultModal">{{ cases[2].num }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[3].date)" data-modal-toggle="defaultModal">{{ cases[3].num }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[4].date)" data-modal-toggle="defaultModal">{{ cases[4].num }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[5].date)" data-modal-toggle="defaultModal">{{ cases[5].num }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[6].date)" data-modal-toggle="defaultModal">{{ cases[6].num }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-        </tr>
-        <tr>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    data-modal-toggle="defaultModal">{{ "23:00" }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[0].date)" data-modal-toggle="defaultModal">{{ cases[0].num }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[1].date)" data-modal-toggle="defaultModal">{{ cases[1].num }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[2].date)" data-modal-toggle="defaultModal">{{ cases[2].num }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[3].date)" data-modal-toggle="defaultModal">{{ cases[3].num }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[4].date)" data-modal-toggle="defaultModal">{{ cases[4].num }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[5].date)" data-modal-toggle="defaultModal">{{ cases[5].num }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[6].date)" data-modal-toggle="defaultModal">{{ cases[6].num }}</span>
-                <div id="emp-0" class="emp"></div>
-            </td>
-        </tr>
-        <tr>
-            <td id="case-1" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[1].date)">{{
-                    cases[1].num
-            }}</span>
-                <div id="emp-1" class="emp"></div>
-            </td>
-            <td id="case-2" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[2].date)">{{
-                    cases[2].num
-            }}</span>
-                <div id="emp-2" class="emp"></div>
-            </td>
-            <td id="case-3" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[3].date)">{{
-                    cases[3].num
-            }}</span>
-                <div id="emp-3" class="emp"></div>
-            </td>
-            <td id="case-4" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[4].date)">{{
-                    cases[4].num
-            }}</span>
-                <div id="emp-4" class="emp"></div>
-            </td>
-            <td id="case-5" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[5].date)">{{
-                    cases[5].num
-            }}</span>
-                <div id="emp-5" class="emp"></div>
-            </td>
-            <td id="case-6" class="border-y border-l border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[6].date)">{{ cases[6].num }}</span>
-                <div id="emp-6" class="emp"></div>
-            </td>
-        </tr>
-        <tr>
-            <td id="case-7" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[7].date)">{{ cases[7].num }}</span>
-                <div id="emp-7" class="emp"></div>
-            </td>
-            <td id="case-8" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[8].date)">{{
-                    cases[8].num
-            }}</span>
-                <div id="emp-8" class="emp"></div>
-            </td>
-            <td id="case-9" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[9].date)">{{
-                    cases[9].num
-            }}</span>
-                <div id="emp-9" class="emp"></div>
-            </td>
-            <td id="case-10" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[10].date)">{{
-                    cases[10].num
-            }}</span>
-                <div id="emp-10" class="emp"></div>
-            </td>
-            <td id="case-11" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[11].date)">{{
-                    cases[11].num
-            }}</span>
-                <div id="emp-11" class="emp"></div>
-            </td>
-            <td id="case-12" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[12].date)">{{
-                    cases[12].num
-            }}</span>
-                <div id="emp-12" class="emp"></div>
-            </td>
-            <td id="case-13" class="border-y border-l border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[13].date)">{{ cases[13].num }}</span>
-                <div id="emp-13" class="emp"></div>
-            </td>
-        </tr>
-        <tr>
-            <td id="case-14" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[14].date)">{{ cases[14].num }}</span>
-                <div id="emp-14" class="emp"></div>
-            </td>
-            <td id="case-15" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[15].date)">{{
-                    cases[15].num
-            }}</span>
-                <div id="emp-15" class="emp"></div>
-            </td>
-            <td id="case-16" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[16].date)">{{
-                    cases[16].num
-            }}</span>
-                <div id="emp-16" class="emp"></div>
-            </td>
-            <td id="case-17" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[17].date)">{{
-                    cases[17].num
-            }}</span>
-                <div id="emp-17" class="emp"></div>
-            </td>
-            <td id="case-18" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[18].date)">{{
-                    cases[18].num
-            }}</span>
-                <div id="emp-18" class="emp"></div>
-            </td>
-            <td id="case-19" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[19].date)">{{
-                    cases[19].num
-            }}</span>
-                <div id="emp-19" class="emp"></div>
-            </td>
-            <td id="case-20" class="border-y border-l border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[20].date)">{{ cases[20].num }}</span>
-                <div id="emp-20" class="emp"></div>
-            </td>
-        </tr>
-        <tr>
-            <td id="case-21" class="border-y border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[21].date)">{{ cases[21].num }}</span>
-                <div id="emp-21" class="emp"></div>
-            </td>
-            <td id="case-22" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[22].date)">{{
-                    cases[22].num
-            }}</span>
-                <div id="emp-22" class="emp"></div>
-            </td>
-            <td id="case-23" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[23].date)">{{
-                    cases[23].num
-            }}</span>
-                <div id="emp-23" class="emp"></div>
-            </td>
-            <td id="case-24" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[24].date)">{{
-                    cases[24].num
-            }}</span>
-                <div id="emp-24" class="emp"></div>
-            </td>
-            <td id="case-25" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[25].date)">{{
-                    cases[25].num
-            }}</span>
-                <div id="emp-25" class="emp"></div>
-            </td>
-            <td id="case-26" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[26].date)">{{
-                    cases[26].num
-            }}</span>
-                <div id="emp-26" class="emp"></div>
-            </td>
-            <td id="case-27" class="border-y border-l border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[27].date)">{{ cases[27].num }}</span>
-                <div id="emp-27" class="emp"></div>
-            </td>
-        </tr>
-        <tr>
-            <td id="case-28" class="border-t border-r border-b border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[28].date)">{{ cases[28].num }}</span>
-                <div id="emp-28" class="emp"></div>
-            </td>
-            <td id="case-29" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[29].date)">{{
-                    cases[29].num
-            }}</span>
-                <div id="emp-29" class="emp"></div>
-            </td>
-            <td id="case-30" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[30].date)">{{
-                    cases[30].num
-            }}</span>
-                <div id="emp-30" class="emp"></div>
-            </td>
-            <td id="case-31" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[31].date)">{{
-                    cases[31].num
-            }}</span>
-                <div id="emp-31" class="emp"></div>
-            </td>
-            <td id="case-32" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[32].date)">{{
-                    cases[32].num
-            }}</span>
-                <div id="emp-32" class="emp"></div>
-            </td>
-            <td id="case-33" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[33].date)">{{
-                    cases[33].num
-            }}</span>
-                <div id="emp-33" class="emp"></div>
-            </td>
-            <td id="case-34" class="border-t border-l border-b border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[34].date)">{{ cases[34].num }}</span>
-                <div id="emp-34" class="emp"></div>
-            </td>
-        </tr>
-        <tr>
-            <td id="case-35" class="border-t border-r border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[35].date)">{{ cases[35].num }}</span>
-                <div id="emp-35" class="emp"></div>
-            </td>
-            <td id="case-36" class="border-t border-r border-l border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[36].date)">{{ cases[36].num }}</span>
-                <div id="emp-36" class="emp"></div>
-            </td>
-            <td id="case-37" class="border-t border-r border-l border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[37].date)">{{ cases[37].num }}</span>
-                <div id="emp-37" class="emp"></div>
-            </td>
-            <td id="case-38" class="border-t border-r border-l border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[38].date)">{{ cases[38].num }}</span>
-                <div id="emp-38" class="emp"></div>
-            </td>
-            <td id="case-39" class="border-t border-r border-l border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[39].date)">{{ cases[39].num }}</span>
-                <div id="emp-39" class="emp"></div>
-            </td>
-            <td id="case-40" class="border-t border-r border-l border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[40].date)">{{ cases[40].num }}</span>
-                <div id="emp-40" class="emp"></div>
-            </td>
-            <td id="case-41" class="border-t border-l border-[#d1d5db] h-32"><span class="num"
-                    @click="addEvent(cases[41].date)">{{ cases[41].num }}</span>
-                <div id="emp-41" class="emp"></div>
-            </td>
-        </tr>
+    </thead>
+     <tbody id="table-cell">
+
+     </tbody>
+
     </table>
+    <div class="w-full p-4"></div>
+    <AddEventModal v-if="showAddEventModal" :date="dateSelected" :form.heureDeb="heureDebSelected" @close="closeModal"/>
+    <ShowEventModal v-if="showShowEventModal" :event="event" @close="closeModal" @modify="updateEvent"/>
+    <UpdateEventModal v-if="showUpdateEventModal" :event="event" @close="closeModal"/>
 </template>
 
 <script>
@@ -1063,6 +52,15 @@ import _ from 'underscore';
 
 const mois = ["Janvier", "Février", "Mars", "Avril", "Mais", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre"];
 const jours = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+const DAYS = {
+    0: 'Dimanche',
+    1: 'Lundi',
+    2: 'Mardi',
+    3: 'Mercredi',
+    4: 'Jeudi',
+    5: 'Vendredi',
+    6: 'Samedi'
+}
 export default {
     name: "MonthView",
     data() {
@@ -1074,6 +72,7 @@ export default {
             showShowEventModal: false,
             showUpdateEventModal: false,
             dateSelected: null,
+            heureDebSelected: null,
             events: [],
             event: null
         };
@@ -1086,7 +85,11 @@ export default {
     },
 
     mounted() {
+        this.buildCaseJour();
+        this.buildCaseHeureJour();
         this.setJourCases();
+        this.setCouleurCaseJour();
+        this.createCaseEvent();
         this.updateEvents();
     },
 
@@ -1118,6 +121,100 @@ export default {
             })
         },
 
+        buildCaseJour(){
+
+            let today = new Date()
+            
+            let enteteDesJours = document.querySelector('#table-days');
+            let enteteDesJoursHTML = '';
+            enteteDesJoursHTML += '<th class="border-y border-r border-[#d1d5db] text-center w-1/7 font-bold">Horaires</th>';
+            jours.forEach(j => {
+                let dayOfWeek = today.getDay()
+                let dayOfMonth = today.getDate()
+                let dayOffset = parseInt(Object.keys(DAYS).find(k => DAYS[k] === j))
+                let dayOfCell = dayOfMonth - dayOfWeek + (dayOfWeek === 0 ? -6 : 1) + dayOffset
+                let dateCell = new Date(today.getFullYear(), today.getMonth(), dayOfCell, 0, 0, 0).toISOString()
+                enteteDesJoursHTML += `<th class="border-y border-r border-[#d1d5db] text-center w-1/7 font-bold" data-date="${dateCell}">${j}</th>`;
+            });
+
+            enteteDesJours.innerHTML = enteteDesJoursHTML;
+        },
+
+        buildCaseHeureJour(){
+            let cases = document.querySelector('#table-cell');
+            let casesHTML = '';
+
+            for (let h = 0; h < 24; h++) {
+                let heure = h.toLocaleString('fr-FR', {
+                    minimumIntegerDigits: 2,
+                    useGrouping: false
+                });
+
+                heure += ":00";
+
+                let heureHTML = `<tr id="h-${h}">`;
+                jours.forEach(j => {
+
+                        if(j === 'Dimanche'){
+                            let caseHorairesHTML = `
+                            <td id="c-${h}-Horaire">
+                                <span class="num">${heure}</span>
+                            </td>
+                        `;
+
+                        heureHTML += caseHorairesHTML;
+                        }
+                        let today = new Date()
+                        let dayOfWeek = today.getDay()
+                        let dayOfMonth = today.getDate()
+                        let dayOffset = parseInt(Object.keys(DAYS).find(k => DAYS[k] === j))
+                        let dayOfCell = dayOfMonth - dayOfWeek + (dayOfWeek === 0 ? -6 : 1) + dayOffset
+                        let dateCell = new Date(today.getFullYear(), today.getMonth(), dayOfCell - 1, h + 1, 0, 0).toISOString()
+                        let uneCaseHTML = `
+                            <td id="c-${h}-${j}" class="border-y border-r border-[#d1d5db] h-32" data-date="${dateCell}">
+                                <span class="num" data-modal-toggle="defaultModal"></span>
+                            </td>
+                        `;
+                        heureHTML += uneCaseHTML;
+          
+                });
+                heureHTML += '</tr>';
+                casesHTML += heureHTML;
+            }
+
+            cases.innerHTML = casesHTML;
+
+
+        },
+
+        setCouleurCaseJour() {
+            const today = new Date()
+            const dayOfWeek = today.getDay()
+
+            for (let i = 0 ; i < 24 ; i++) {
+                const currentDay = document.querySelector(`#c-${i}-${DAYS[dayOfWeek]}`)
+                if (currentDay) {
+                    currentDay.classList.add("jourActuel");
+                }
+            }
+        },
+
+        createCaseEvent() {
+            for (let i = 0 ; i < 24 ; i++) {
+                for (let d = 0 ; d < Object.keys(DAYS).length ; d++) {
+                    const currentCell = document.querySelector(`#c-${i}-${DAYS[d]}`)
+                    currentCell.addEventListener('click', (e) => {
+                        let dateCell = currentCell.getAttribute('data-date')
+                        this.showAddEventModal = true
+                        this.dateSelected = dateCell.split('T')[0]
+                        this.heureDebSelected = dateCell.split('T')[1]
+                        console.log(this.dateSelected, this.heureDebSelected)
+                    })
+                }
+            }
+        },
+
+
         setJourCases() {
             this.cases = [];
             let nbCasesParcourue = 0;
@@ -1133,10 +230,6 @@ export default {
             nbJourMoisP = nbJourMoisP - firstDayOfMonthA + 1;
 
             for (let i = 0; i < firstDayOfMonthA; i++) {
-                if (this.$dayjs().isSame(moisPP, 'day')) {
-                    document.querySelector('#case-' + nbCasesParcourue).classList.add("jourActuel");
-                }
-
                 const uneCase = {
                     num: nbJourMoisP,
                     date: moisPP.toJSON()
@@ -1149,17 +242,13 @@ export default {
 
             let moisA = this.date.startOf("month");
             for (let i = 1; i < nbJourMoisA + 1; i++) {
-                if (this.$dayjs().isSame(moisA, 'day')) {
-                    document.querySelector('#case-' + nbCasesParcourue).classList.add("jourActuel");
-                }
-
 
                 const uneCase = {
                     num: i,
                     date: moisA.toJSON()
                 };
                 this.cases.push(uneCase);
-                document.querySelector("#case-" + nbCasesParcourue).classList.add("jour-blanc");
+                //document.querySelector("#case-" + nbCasesParcourue).classList.add("jour-blanc");
                 nbCasesParcourue++;
                 moisA = moisA.add(1, "day");
             }
@@ -1167,9 +256,6 @@ export default {
             let moisS = this.date.endOf("month").add(1, "day");
             let jourMoisS = 1;
             for (let i = nbCasesParcourue; i < 42; i++) {
-                if (this.$dayjs().isSame(moisS, 'day')) {
-                    document.querySelector('#case-' + nbCasesParcourue).classList.add("jourActuel");
-                }
 
                 const uneCase = {
                     num: jourMoisS,
@@ -1184,12 +270,26 @@ export default {
             this.getAllEvent();
         },
 
+        addCaseEvent() {
+            for (let i = 0 ; i < 42 ; i ++) {
+                let elem = documents.querySelector("#emp-" + i);
+                console.log(elem)
+                elem.addEventListener('click', (e) => {
+                    addEvent(cases[i].date)
+                    console.log("TEST")
+                })
+
+            }
+        },
+
+        //@click="addEvent(cases[${j}].date)"
+
         clearAllEvent() {
             for (let i = 0; i < 42; i++) {
                 let elem = document.querySelector("#emp-" + i);
-                while (elem.hasChildNodes()) {
+                /*while (elem.hasChildNodes()) {
                     elem.removeChild(elem.firstChild);
-                }
+                }*/
             }
         },
 
@@ -1209,8 +309,8 @@ export default {
 
         rezBgCell() {
             for (let i = 0; i < 42; i++) {
-                document.querySelector("#case-" + i).classList.remove("jour-blanc");
-                document.querySelector("#case-" + i).classList.remove("jourActuel");
+                //document.querySelector("#case-" + i).classList.remove("jour-blanc");
+                //document.querySelector("#case-" + i).classList.remove("jourActuel");
             }
         },
 
@@ -1367,6 +467,7 @@ table {
 .jour-blanc {
     background-color: #ffffff;
 }
+
 
 .num {
     text-align: center;
