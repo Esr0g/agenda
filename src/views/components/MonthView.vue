@@ -18,7 +18,7 @@
             <td class="border-y border-l border-[#d1d5db] text-center w-1/7 font-bold">Dimanche</td>
         </tr>
         <tr>
-            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[0].date)" data-modal-toggle="defaultModal">{{ cases[0].num }}</span><div id="emp-0" class="emp"></div></td>
+            <td id="case-0" class="border-y border-r border-[#d1d5db] h-32" @dblclick=""><span class="num" @click="addEvent(cases[0].date)" data-modal-toggle="defaultModal">{{ cases[0].num }}</span><div id="emp-0" class="emp"></div></td>
             <td id="case-1" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[1].date)">{{ cases[1].num }}</span><div id="emp-1" class="emp"></div></td>
             <td id="case-2" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[2].date)">{{ cases[2].num }}</span><div id="emp-2" class="emp"></div></td>
             <td id="case-3" class="border border-[#d1d5db] h-32"><span class="num" @click="addEvent(cases[3].date)">{{ cases[3].num }}</span><div id="emp-3" class="emp"></div></td>
