@@ -203,16 +203,6 @@ export default {
             }
         },
 
-        addCaseEvent() {
-            for (let i = 0 ; i < 42 ; i ++) {
-                let elem = documents.querySelector("#emp-" + i);
-                console.log(elem)
-                elem.addEventListener('click', (e) => {
-                    addEvent(cases[i].date)
-                })
-
-            }
-        },
 
         clearAllEvent() {
             for (let i = 0; i < 42; i++) {

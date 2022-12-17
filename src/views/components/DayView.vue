@@ -37,9 +37,10 @@
 </template>
 
 <script>
-import AddEventModal from './AddEventModal.vue';
+import AddEventModal from "./AddEventModal.vue";
 import ShowEventModal from "./ShowEventModal.vue";
 import UpdateEventModal from './UpdateEventModal.vue';
+import _ from 'underscore';
 
 const jours = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
 const DAYS = {
@@ -54,7 +55,7 @@ const DAYS = {
 let currentDay = new Date()
 
 export default {
-
+    name: "DayView",
     data() {
         return {
             day: null,
@@ -160,17 +161,6 @@ export default {
                     this.dateSelected = dateCell.split('T')[0]
                     this.heureDebSelected = dateCell.split('T')[1]
                     console.log(this.dateSelected, this.heureDebSelected)
-                })
-            }
-        },
-
-        addCaseEvent() {
-            for (let i = 0 ; i < 42 ; i ++) {
-                let elem = documents.querySelector("#emp-" + i);
-                console.log(elem)
-                elem.addEventListener('click', (e) => {
-                    console.log("TEST")
-                    addEvent(cases[i].date)
                 })
             }
         },
@@ -321,6 +311,7 @@ export default {
         }
 
     },
+    components: { AddEventModal, ShowEventModal, UpdateEventModal }
 }
 
 </script>
