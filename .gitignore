@@ -62,3 +62,4 @@ typings/
 
 #On ignore les builds automatique
 public/assets/
+public/index.html
