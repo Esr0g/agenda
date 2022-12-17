@@ -324,3 +324,56 @@ export default {
 }
 
 </script>
+
+<style scoped>
+table {
+    border-collapse: separate !important;
+    border-spacing: 0;
+    border: 1px solid;
+    border-radius: 0.8em;
+    border-color: #f3f3f4;
+    box-shadow: 1px 1px 5px #f3f3f4;
+    table-layout: fixed;
+}
+
+.jour-blanc {
+    background-color: #ffffff;
+}
+
+
+.num {
+    text-align: center;
+    display: block;
+    position: relative;
+    top: -0.1rem;
+    border-radius: 999px;
+    min-width: 1.8rem;
+    max-width: 1.8rem;
+    min-height: 1.8rem;
+    max-height: 1.8rem;
+    padding-top: 0.15rem;
+    cursor: pointer;
+}
+
+.num:hover {
+    background-color: #06b6d4;
+}
+
+.jourActuel {
+    background-color: #1e8da07b;
+}
+
+.emp {
+    position: relative;
+    width: 100%;
+    height: 65%;
+    bottom: 0.2rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    justify-content: center;
+    font-size: 0.8rem;
+    max-width: 100%;
+    margin-top: 5px;
+}
+</style>
