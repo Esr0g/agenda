@@ -98,3 +98,5 @@
         id: idEvent un entier
     }
   ```
+
+A lire : On est concient que le long polling fonctionne mal avec google chrome, mais on n'a pas trouvé de moyen de régler le problème. Il vaut mieux utiliser firefox pour utiliser l'agenda.

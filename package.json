@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "DBUG=express:* nodemon -e js,json ./src/bin/www",
+    "start": "DBUG=express:* nodemon -e js ./src/bin/www",
     "start2": "set DEBUG=express:* & node .\\src\\bin\\www.js",
     "build": "rm -rf ./public/assets/ && vite build",
     "build2": "del -rf .\\public\\assets\\ && vite build",
