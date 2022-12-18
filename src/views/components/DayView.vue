@@ -114,7 +114,7 @@ export default {
                 heureHTML += caseHorairesHTML;
                 
                 let element = document.querySelector('#current-day');
-                let dataDate = this.$dayjs(this.date).hour(h + 1).minute(0);
+                let dataDate = this.$dayjs(this.date).hour(h).minute(0);
                 let uneCaseHTML = `
                     <td colspan="7" id="c-${h}" class="border-y border-r border-[#d1d5db] h-32" data-date="${dataDate.toJSON()}">
                         <span class="num" data-modal-toggle="defaultModal"></span>
