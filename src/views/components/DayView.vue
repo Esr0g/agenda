@@ -201,9 +201,10 @@ export default {
                         dateFin = this.$dayjs(e.dateFin);
                     }
                     
-                    if ((dateCell.isSame(dateDeb, 'day') && (dateCell.isSame(dateDeb, 'hour') || dateCell.isSame(dateFin, 'hour') || (dateCell.isBefore(dateFin, 'day') && dateCell.isAfter(dateDeb, 'hour'))))
+                    if ((dateCell.isSame(dateDeb, 'day') && e.allDay) 
+                            || (dateCell.isSame(dateDeb, 'day') && (dateCell.isSame(dateDeb, 'hour') || dateCell.isSame(dateFin, 'hour') || (dateCell.isBefore(dateFin, 'day') && dateCell.isAfter(dateDeb, 'hour'))))
                             || (dateCell.isAfter(dateDeb, 'day') && dateCell.isBefore(dateFin, 'day'))
-                        || (dateCell.isSame(dateFin, 'day') && (dateCell.isSame(dateFin, 'hour') || (dateCell.isBefore(dateFin, 'hour') && dateCell.isAfter(dateDeb, 'hour'))))) {
+                            || (dateCell.isSame(dateFin, 'day') && (dateCell.isSame(dateFin, 'hour') || (dateCell.isBefore(dateFin, 'hour') && dateCell.isAfter(dateDeb, 'hour'))))) {
                         
                         let element = document.createElement('div');
                         element.classList.add("event");
