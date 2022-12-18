@@ -41,7 +41,6 @@ import AddEventModal from "./AddEventModal.vue";
 import ShowEventModal from "./ShowEventModal.vue";
 import UpdateEventModal from './UpdateEventModal.vue';
 import _ from 'underscore';
-
 const jours = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
 const DAYS = {
     0: 'Dimanche',
@@ -53,7 +52,6 @@ const DAYS = {
     6: 'Samedi'
 }
 let currentDay = new Date()
-
 export default {
     name: "DayView",
     data() {
@@ -70,20 +68,16 @@ export default {
             event: null
         };
     },
-
     beforeMount() {
         this.day = new Date().toLocaleDateString()
         this.date = this.$dayjs()
     },
-
     mounted() {
         this.buildCases()
         this.createCaseEvent()
         this.updateEvents()
     },
-
     methods: {
-
         buildCases() {
             let enteteDesHeures = document.querySelector('#table-days');
             let enteteDesHeuresHTML = '<th colspan="1" class="border-y border-r border-[#d1d5db] text-center w-1/7 font-bold">Horaires</th>'
@@ -93,7 +87,6 @@ export default {
             dateCell = dateCell.split('T')[0]
             let dateFormat = dateCell.split('-').reverse()
             dateFormat = dateFormat[0] + "/" + dateFormat[1] + "/" + dateFormat[2]
-
             enteteDesHeuresHTML += `<th colspan="7" id="current-day" class="border-y border-r border-[#d1d5db] text-center w-6/7 font-bold" data-date="${dateCell}">${dayOfWeekName}&nbsp; ${dateFormat}</th>`
             enteteDesHeures.innerHTML = enteteDesHeuresHTML;
             let heureHTML
@@ -111,13 +104,11 @@ export default {
                     <td colspan="1" id="c-${h}-Horaire">
                         <span class="num">${heure}</span>
                     </td>`;
-
                 heureHTML += caseHorairesHTML;
                 
                 let element = document.querySelector('#current-day')
                 let dataDate = element.getAttribute('data-date')
                 let dateCell = dataDate + 'T' + heure
-
                 let uneCaseHTML = `
                     <td colspan="7" id="c-${h}" class="border-y border-r border-[#d1d5db] h-32" data-date="${dateCell}">
                         <span class="num" data-modal-toggle="defaultModal"></span>
@@ -126,13 +117,10 @@ export default {
                 heureHTML += uneCaseHTML;
                 heureHTML += '</tr>';
                 casesHTML += heureHTML;
-
                 cases.innerHTML = casesHTML;
           
                 };
-
             },
-
             createCaseEvent() {
             for (let i = 0 ; i < 24 ; i++) {
                 const currentCell = document.querySelector(`#c-${i}`)
@@ -144,7 +132,6 @@ export default {
                 })
             }
         },
-
         clearAllEvent() {
             this.events = []
             for (let i = 0 ; i < 24 ; i++) {
@@ -154,36 +141,30 @@ export default {
                 }
             }
         },
-
         previousDay() {
             currentDay.setDate(currentDay.getDate() - 1)
             this.buildCases()
             this.createCaseEvent()
         },
-
         nextDay() {
             currentDay.setDate(currentDay.getDate() + 1)
             this.buildCases()
             this.createCaseEvent()
         },
-
         rezDate() {
             currentDay = new Date()
             this.buildCases()
             this.createCaseEvent()
         },
-
         addEvent(date) {
             this.dateSelected = this.$dayjs(date).format("YYYY-MM-DD");
             this.showAddEventModal = true;
         },
-
         closeModal(val) {
             this.showAddEventModal = val;
             this.showShowEventModal = val;
             this.showUpdateEventModal = val;
         },
-
         getUserId() {
             let cookies = document.cookie.split("=");
             let user = JSON.parse(cookies[1]);
@@ -193,21 +174,17 @@ export default {
         afficherEvents() {
             for (let i = 0; i < 24; i++) {
                 let cellule = document.querySelector(`#c-${i}`)
-                let dateCell = cellule.getAttribute("data-date").replace('Z', '')
-                let currentLocaleDate = convertToLocaleDate(dateCell)
+                let dateCell = this.$dayjs(cellule.getAttribute("data-date"));
         
                 for (let e of this.events) {
-                    let dateDeb = convertToLocaleDate(e.dateDeb);
-                    dateDeb.setDate(dateDeb.getDate() + 1)
-                    let dateFin =convertToLocaleDate(e.dateFin);
-                    dateFin.setDate(dateFin.getDate() + 1)
-
-                    console.log(currentLocaleDate, dateDeb, dateFin)
-
+                    console.log(ok);
+                    let dateDeb = this.$dayjs(e.dateDeb);
+                    let dateFin = null;
+                    if (e.dateFin) { 
+                        dateFin = this.$dayjs(e.dateFin);
+                    }
                     
-                    if (currentLocaleDate.getDate() === dateDeb.getDate() 
-                            || (dateFin && currentLocaleDate.getTime() <= dateFin.getTime() && currentLocaleDate.getTime() >= dateDeb.getTime())
-                            || (dateFin && currentLocaleDate.getDate() === dateFin.getDate())) {
+                    if (dateCell.isSame(dateDeb, 'day') && dateCell.isAfter(dateDeb, 'hour')) {
                         
                             if (cellule.children.length < 3) {
                                 let element = document.createElement('div');
@@ -216,19 +193,15 @@ export default {
                                 element.addEventListener("click", () => {
                                     this.afficheEvt(e);
                                 });
-
                                 let eventName = document.createTextNode(e.name);
                                 let eventStart = document.createTextNode(dateDeb);
-
                                 let divElement = document.createElement('div');
                                 divElement.style.maxWidth = "60%";
                                 divElement.style.overflow = "hidden";
                                 divElement.style.textOverflow = "ellipsis";
                                 divElement.style.whiteSpace = "nowrap";
-
                                 let child2 = document.createElement('div');
                                 child2.marginLeft = "0.5rem";
-
                                 divElement.appendChild(eventName);
                                 divElement.appendChild(eventStart);
                                 element.appendChild(divElement);
@@ -254,59 +227,45 @@ export default {
                 }
             }
         },
-
         updateEvents() {
-
             this.clearAllEvent()
             let dateDebutText = document.querySelector("#c-0").getAttribute("data-date")
             let dateFinText = document.querySelector("#c-23").getAttribute("data-date")
-
             let dateDebut = convertToLocaleDate(dateDebutText)
             dateDebut.setDate(dateDebut.getDate() - 1)
             let dateDebutQuery = dateDebut.toISOString().split('T')[0]
-
             let dateFin = convertToLocaleDate(dateFinText)
             dateFin.setDate(dateFin.getDate() + 1)
             let dateFinQuery = dateFin.toISOString().split('T')[0]
-
-
-            console.log(dateDebut, dateFin)
+            //console.log(dateDebut, dateFin)
             let data = {
                 userID: this.getUserId(),
                 dateDeb: dateDebutQuery,
                 dateFin: dateFinQuery,
             }
-
             this.$http({
                 method: 'get',
                 url: '/api/auth/getEventParam',
                 params: data
             }).then((res) => {
-                for(let e of res.data.newEvents){
-                    this.events.push(e)
-                }
+                this.events = this.data.newEvents;
                 this.afficherEvents()
             }).catch((err) => {
                 console.log(err)
             });
-
             setTimeout(this.updateEvents, 3000);
         },
-
         afficheEvt(evt) {
             this.event = evt;
             this.showShowEventModal = true;
         },
-
         updateEvent(evt) {
             this.event = evt;
             this.showUpdateEventModal = true;
         }
-
     },
     components: { AddEventModal, ShowEventModal, UpdateEventModal }
 }
-
 const convertToLocaleDate = (utcDate) => {
     return new Date(utcDate.replace('Z', ''))
 }
@@ -322,12 +281,9 @@ table {
     box-shadow: 1px 1px 5px #f3f3f4;
     table-layout: fixed;
 }
-
 .jour-blanc {
     background-color: #ffffff;
 }
-
-
 .num {
     text-align: center;
     display: block;
@@ -341,15 +297,12 @@ table {
     padding-top: 0.15rem;
     cursor: pointer;
 }
-
 .num:hover {
     background-color: #06b6d4;
 }
-
 .jourActuel {
     background-color: #1e8da07b;
 }
-
 .emp {
     position: relative;
     width: 100%;

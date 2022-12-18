@@ -104,7 +104,7 @@ export default {
 
             let j = 6;
             for (let i = 1; i <= 6; i++) { 
-                enteteDesJoursHTML += `<th id="jour-${i}"class="border-y border-r border-[#d1d5db] text-center w-1/7 font-bold" data-date="${this.date.weekday(-j).toJSON()}">${jours[i]} &nbsp; ${this.date.add(-j, 'd').format("DD/MM/YYYY")}</th>`;
+                enteteDesJoursHTML += `<th id="jour-${i}"class="border-y border-r border-[#d1d5db] text-center w-1/7 font-bold" data-date="${this.date.weekday(-j).toJSON()}">${jours[i]} &nbsp; ${this.date.weekday(-j).format("DD/MM/YYYY")}</th>`;
                 j--;
             }
 
@@ -140,7 +140,7 @@ export default {
                     }
 
                     let uneCaseHTML = `
-                        <td id="c-${h}-${jours[j]}" class="border-y border-r border-[#d1d5db] h-32" data-date="${this.date.weekday(-r).hour(h).minute(0).toJSON()}">
+                        <td id="c-${h}-${jours[j]}" class="border-y border-r border-[#d1d5db] h-32" data-date="${this.date.weekday(-r).hour(h + 1).minute(1).toJSON()}">
                             <span class="num" data-modal-toggle="defaultModal"></span>
                         </td>
                     `;
@@ -150,7 +150,7 @@ export default {
                 }
 
                 let uneCaseHTML = `
-                        <td id="c-${h}-Dimanche" class="border-y border-r border-[#d1d5db] h-32" data-date="${this.date.weekday(0).hour(h).minute(0).toJSON()}">
+                        <td id="c-${h}-Dimanche" class="border-y border-r border-[#d1d5db] h-32" data-date="${this.date.weekday(0).hour(h+1).minute(0).toJSON()}">
                             <span class="num" data-modal-toggle="defaultModal"></span>
                         </td>
                     `;
