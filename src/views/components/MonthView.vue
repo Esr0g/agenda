@@ -86,6 +86,7 @@ import _ from 'underscore';
 
 const mois = ["Janvier", "Février", "Mars", "Avril", "Mais", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre"];
 const jours = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+
 export default {
     name: "MonthView",
     data() {
@@ -98,7 +99,8 @@ export default {
             showUpdateEventModal: false,
             dateSelected: null,
             events: [],
-            event: null
+            event: null,
+            mounted: false
         };
     },
 
@@ -109,8 +111,13 @@ export default {
     },
 
     mounted() {
+        this.mounted = true;
         this.setJourCases();
         this.updateEvents();
+    },
+
+    beforeUnmount() { 
+        this.mounted = false;
     },
 
     methods: {
@@ -334,32 +341,37 @@ export default {
         },
 
         updateEvents() {
-            this.$http({
-                method: 'get',
-                url: '/api/auth/getEventUpdate'
-            }).then((res) => {
+            if (this.mounted) { 
+                this.$http({
+                    method: 'get',
+                    url: '/api/auth/getEventUpdate',
+                }).then((res) => {
 
-                if (res.data.type === "ADD") {
-                    this.events.push(res.data.event);
-                    this.clearAllEvent();
-                    this.afficherEvents();
-                } else if (res.data.type === "DELETE") {
-                    this.events = _.reject(this.events, (e) => e.id == res.data.eventID);
-                    this.clearAllEvent();
-                    this.afficherEvents();
-                } else if (res.data.type === "MODIFY") {
-                    this.events = _.reject(this.events, (e) => e.id == res.data.oldId);
-                    this.events.push(res.data.event);
-                    this.clearAllEvent();
-                    this.afficherEvents();
-                }
+                    if (res.data.type === "ADD") {
+                        this.events.push(res.data.event);
+                        this.clearAllEvent();
+                        this.afficherEvents();
+                    } else if (res.data.type === "DELETE") {
+                        this.events = _.reject(this.events, (e) => e.id == res.data.eventID);
+                        this.clearAllEvent();
+                        this.afficherEvents();
+                    } else if (res.data.type === "MODIFY") {
+                        this.events = _.reject(this.events, (e) => e.id == res.data.oldId);
+                        this.events.push(res.data.event);
+                        this.clearAllEvent();
+                        this.afficherEvents();
+                    }
 
 
-
-                setTimeout(this.updateEvents, 500);
-            }).catch((err) => {
-                setTimeout(this.updateEvents(), 500);
-            });
+                    if (this.mounted) { 
+                        setTimeout(this.updateEvents, 500);
+                    }
+                }).catch((err) => {
+                    if (this.mounted) { 
+                        setTimeout(this.updateEvents, 5000);
+                    }
+                });
+            }  
         },
 
         afficheEvt(evt) {

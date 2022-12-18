@@ -81,14 +81,14 @@ export default {
         getDateDebut() {
             let date = this.$dayjs(this.event.dateDeb);
             return jours[date.day()] + " " + date.date() + " " + mois[date.month()] + " " + date.year()
-                + " à " + date.format("H:MM");
+                + " à " + date.format("H:mm");
         },
 
         getDateFin() {
             if (!this.event.allDay) {
                 let date = this.$dayjs(this.event.dateFin);
                 return jours[date.day()] + " " + date.date() + " " + mois[date.month()] + " " + date.year()
-                    + " à " + date.format("H:MM");
+                    + " à " + date.format("H:mm");
             } else {
                 return "";
             }
