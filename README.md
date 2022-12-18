@@ -100,3 +100,6 @@
   ```
 
 A lire : On est concient que le long polling fonctionne mal avec google chrome, mais on n'a pas trouvé de moyen de régler le problème. Il vaut mieux utiliser firefox pour utiliser l'agenda.
+Compte de test avec des événements déja présent en décembre 2022 :  
+- Identifiant : Test  
+- Mot de passe : 123456  
