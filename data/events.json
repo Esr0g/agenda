@@ -1,0 +1,2 @@
+1
+[{"userID":0,"dateDeb":"2022-12-01T15:10:00.000Z","dateFin":"2022-12-01T19:30:00.000Z","name":"Premier evt","adresse":"Nancy","description":"Ceci est un test","allDay":false,"date_creation":"2022-12-18T13:08:06.477Z","date_modification":"2022-12-18T13:08:06.479Z","id":0},{"userID":0,"dateDeb":"2022-12-13T09:30:00.000Z","dateFin":"2022-12-13T15:10:00.000Z","name":"Test2","adresse":"Nanct","description":"Ceci est un autre test","allDay":false,"date_creation":"2022-12-18T13:09:04.965Z","date_modification":"2022-12-18T13:09:04.965Z","id":1}]
