@@ -90,7 +90,7 @@ export function getEventParam(req, res, next) {
                     }
                 }
             }  
-
+            res.setHeader('Content-Type', 'application/json')
             res.status(200).json({
                 message: "Evénement crée avec succès",
                 newEvents

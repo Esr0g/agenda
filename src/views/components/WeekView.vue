@@ -93,26 +93,6 @@ export default {
 
     methods: {
         
-        async getAllEvent() {
-            let data = {
-                userID: this.getUserId(),
-                dateDeb: this.cases[0].date,
-                dateFin: this.cases[41].date,
-            }
-
-            this.$http({
-                method: 'get',
-                url: '/api/auth/getEventParam',
-                params: data
-
-            }).then((res) => {
-                this.events = res.data.newEvents;
-                this.afficherEvents();
-            }).catch((err) => {
-                console.error(err);
-            })
-        },
-
         buildCaseJour(){
             let enteteDesJours = document.querySelector('#table-days');
             let enteteDesJoursHTML = '';
@@ -121,12 +101,13 @@ export default {
                 let dayOfWeek = currentDay.getDay()
                 let dayOfMonth = currentDay.getDate()
                 let dayOffset = parseInt(Object.keys(DAYS).find(k => DAYS[k] === j))
-                let dayOfCell = dayOfMonth - dayOfWeek + (dayOfWeek === 0 ? -6 : 1) + dayOffset
+                let dayOfCell = dayOfMonth - dayOfWeek + (dayOfWeek === 0 ? 1 : -6) + dayOffset
                 let dateCell = new Date(currentDay.getFullYear(), currentDay.getMonth(), dayOfCell, 0, 0, 0).toISOString()
                 let date = dateCell.split('T')[0]
                 let dateFormat = date.split('-').reverse()
                 let datePerDay = dateFormat[0] + "/" + dateFormat[1] + "/" + dateFormat[2]
-                enteteDesJoursHTML += `<th class="border-y border-r border-[#d1d5db] text-center w-1/7 font-bold" data-date="${dateCell}">${j} &nbsp; ${datePerDay}</th>`;
+
+                enteteDesJoursHTML += `<th id="jour-${j}"class="border-y border-r border-[#d1d5db] text-center w-1/7 font-bold" data-date="${dateCell}">${j} &nbsp; ${datePerDay}</th>`;
             });
             enteteDesJours.innerHTML = enteteDesJoursHTML;
         },
@@ -158,7 +139,7 @@ export default {
                         let dayOfWeek = currentDay.getDay()
                         let dayOfMonth = currentDay.getDate()
                         let dayOffset = parseInt(Object.keys(DAYS).find(k => DAYS[k] === j))
-                        let dayOfCell = dayOfMonth - dayOfWeek + (dayOfWeek === 0 ? -6 : 1) + dayOffset
+                        let dayOfCell = dayOfMonth - dayOfWeek + (dayOfWeek === 0 ? 1 : -6) + dayOffset
                         let dateCell = new Date(currentDay.getFullYear(), currentDay.getMonth(), dayOfCell - 1, h + 1, 0, 0).toISOString()
                         let uneCaseHTML = `
                             <td id="c-${h}-${j}" class="border-y border-r border-[#d1d5db] h-32" data-date="${dateCell}">
@@ -179,7 +160,6 @@ export default {
 
         setCouleurCaseJour() {
             const dayOfWeek = currentDay.getDay()
-
             for (let i = 0 ; i < 24 ; i++) {
                 const currentDay = document.querySelector(`#c-${i}-${DAYS[dayOfWeek]}`)
                 if (currentDay) {
@@ -205,26 +185,29 @@ export default {
 
 
         clearAllEvent() {
-            for (let i = 0; i < 42; i++) {
-                let elem = document.querySelector("#emp-" + i);
-                /*while (elem.hasChildNodes()) {
-                    elem.removeChild(elem.firstChild);
-                }*/
+            this.events = []
+            for (let i = 0 ; i < 24 ; i++) {
+                for (let d = 0 ; d < Object.keys(DAYS).length ; d++) {
+                    const currentCell = document.querySelector(`#c-${i}-${DAYS[d]}`)
+                    currentCell.innerHTML = ""
+                }
             }
         },
 
+
         previousWeek() {
-            currentDay.setDate(currentDay.getDate() - 7)
+            currentDay.setDate(currentDay.getDate() - 7);
             this.buildCaseJour();
             this.buildCaseHeureJour();
+            this.createCaseEvent();
         },
 
         nextWeek() {
-            currentDay.setDate(currentDay.getDate() + 7)
+            currentDay.setDate(currentDay.getDate() + 7);
             this.buildCaseJour();
             this.buildCaseHeureJour();
+            this.createCaseEvent();
         },
-
 
         rezDate() {
             currentDay = new Date()
@@ -252,71 +235,67 @@ export default {
         },
 
         afficherEvents() {
-            for (let i = 0; i < 42; i++) {
-                let date1 = this.$dayjs(this.cases[i].date);
+            for (let i = 0 ; i < 24 ; i++) {
+                for (let d = 0 ; d < Object.keys(DAYS).length ; d++) {
+                    let cellule = document.querySelector(`#c-${i}-${DAYS[d]}`)
+                    let dateCell = cellule.getAttribute("data-date").replace('Z', '')
+                    let currentLocaleDate = convertToLocaleDate(dateCell)
+                    //console.log(currentLocaleDate)
+                    
+                    for (let e of this.events) {
+                        let dateDeb = convertToLocaleDate(e.dateDeb)
+                        let dateFin = convertToLocaleDate(e.dateFin)
 
-                for (let evt of this.events) {
-                    let date2 = this.$dayjs(evt.dateDeb);
-                    let date3 = null;
-                    if (evt.dateFin) {
-                        date3 = this.$dayjs(evt.dateFin);
-                    }
+                        //console.log(currentLocaleDate.getDate() === dateDeb.getDate())
+                    
+                        if (currentLocaleDate.getDate() === dateDeb.getDate() 
+                            || (dateFin && currentLocaleDate.getTime() <= dateFin.getTime() && currentLocaleDate.getTime() >= dateDeb.getTime())
+                            || (dateFin && currentLocaleDate.getDate() === dateFin.getDate())) {
 
-                    if (date1.isSame(date2, 'day') || (date3 && date1.isBefore(date3) && date1.isAfter(date2) || (date3 && date1.isSame(date3)))) {
-                        let cellule = document.querySelector('#emp-' + i);
+                                if (cellule.children.length < 3) {
+                                    let element = document.createElement('div');
+                                    element.classList.add("event");
+                                    element.classList.add("display-event");
+                                    element.addEventListener("click", () => {
+                                        this.afficheEvt(e);
+                                    });
 
-                        if (cellule.children.length < 3) {
-                            let element = document.createElement('div');
-                            element.classList.add("event");
-                            element.style.display = "flex";
-                            element.style.justifyContent = "space-between";
-                            element.style.maxWidth = "100%";
-                            element.style.border = "2px #ceeafa solid";
-                            element.style.borderRadius = "8px";
-                            element.style.margin = "0.1rem 0.2rem 0.1rem 0.2rem";
-                            element.style.backgroundColor = "#ebf8ff";
-                            element.style.paddingLeft = "0.2rem";
-                            element.style.paddingRight = "0.2rem";
-                            element.style.color = "#203d68";
-                            element.style.cursor = "pointer"
-                            element.addEventListener("click", () => {
-                                this.afficheEvt(evt);
-                            });
+                                    let eventName = document.createTextNode(e.name);
+                                    let eventStart = document.createTextNode(dateDeb);
 
-                            let text1 = document.createTextNode(evt.name);
-                            let text2 = document.createTextNode(date2.format("H:mm"));
+                                    let divElement = document.createElement('div');
+                                    divElement.style.maxWidth = "60%";
+                                    divElement.style.overflow = "hidden";
+                                    divElement.style.textOverflow = "ellipsis";
+                                    divElement.style.whiteSpace = "nowrap";
 
-                            let child1 = document.createElement('div');
-                            child1.style.maxWidth = "60%";
-                            child1.style.overflow = "hidden";
-                            child1.style.textOverflow = "ellipsis";
-                            child1.style.whiteSpace = "nowrap";
+                                    let child2 = document.createElement('div');
+                                    child2.marginLeft = "0.5rem";
 
-                            let child2 = document.createElement('div');
-                            child2.marginLeft = "0.5rem";
+                                    divElement.appendChild(eventName);
+                                    divElement.appendChild(eventStart);
+                                    //child2.appendChild(eventStart);
+                                    element.appendChild(divElement);
+                                    //element.appendChild(child2);
+                                    cellule.appendChild(element);
+                                } else {
+                                    cellule.removeChild(cellule.lastChild);
+                                    let element = document.createElement('div')
+                                    element.style.textAlign = "center";
+                                    element.style.maxWidth = "100%";
+                                    element.style.border = "2px #ceeafa solid";
+                                    element.style.borderRadius = "8px";
+                                    element.style.margin = "0.1rem 0.2rem 0.1rem 0.2rem";
+                                    element.style.backgroundColor = "#ebf8ff";
+                                    element.style.paddingLeft = "0.2rem";
+                                    element.style.paddingRight = "0.2rem";
+                                    element.style.color = "#203d68";
+                                    let text = document.createTextNode("...");
+                                    element.appendChild(text);
+                                    cellule.append(element);
 
-                            child1.appendChild(text1);
-                            child2.appendChild(text2);
-                            element.appendChild(child1);
-                            element.appendChild(child2);
-                            cellule.appendChild(element);
-                        } else {
-                            cellule.removeChild(cellule.lastChild);
-                            let element = document.createElement('div')
-                            element.style.textAlign = "center";
-                            element.style.maxWidth = "100%";
-                            element.style.border = "2px #ceeafa solid";
-                            element.style.borderRadius = "8px";
-                            element.style.margin = "0.1rem 0.2rem 0.1rem 0.2rem";
-                            element.style.backgroundColor = "#ebf8ff";
-                            element.style.paddingLeft = "0.2rem";
-                            element.style.paddingRight = "0.2rem";
-                            element.style.color = "#203d68";
-                            let text = document.createTextNode("...");
-                            element.appendChild(text);
-                            cellule.append(element);
-
-                            //TODO 
+                                    //TODO 
+                                }
                         }
                     }
                 }
@@ -324,32 +303,32 @@ export default {
         },
 
         updateEvents() {
+
+            this.clearAllEvent()
+
+            let dateDeb = document.querySelector("#jour-Dimanche").getAttribute("data-date").split("T")
+            let dateFin = document.querySelector("#jour-Samedi").getAttribute("data-date").split("T")
+            let data = {
+                userID: this.getUserId(),
+                dateDeb: dateDeb[0],
+                dateFin: dateFin[0],
+            }
+
+
             this.$http({
                 method: 'get',
-                url: '/api/auth/getEventUpdate'
+                url: '/api/auth/getEventParam',
+                params: data
             }).then((res) => {
-
-                if (res.data.type === "ADD") {
-                    this.events.push(res.data.event);
-                    this.clearAllEvent();
-                    this.afficherEvents();
-                } else if (res.data.type === "DELETE") {
-                    this.events = _.reject(this.events, (e) => e.id == res.data.eventID);
-                    this.clearAllEvent();
-                    this.afficherEvents();
-                } else if (res.data.type === "MODIFY") {
-                    this.events = _.reject(this.events, (e) => e.id == res.data.oldId);
-                    this.events.push(res.data.event);
-                    this.clearAllEvent();
-                    this.afficherEvents();
+                for(let e of res.data.newEvents){
+                    this.events.push(e)
                 }
-
-
-
-                setTimeout(this.updateEvents, 500);
+                this.afficherEvents()
             }).catch((err) => {
-                setTimeout(this.updateEvents(), 500);
+                console.log(err)
             });
+
+            setTimeout(this.updateEvents, 1000);
         },
 
         afficheEvt(evt) {
@@ -364,6 +343,11 @@ export default {
     },
     components: { AddEventModal, ShowEventModal, UpdateEventModal }
 }
+
+const convertToLocaleDate = (utcDate) => {
+    return new Date(utcDate.replace('Z', ''))
+}
+
 </script>
 
 <style scoped>
