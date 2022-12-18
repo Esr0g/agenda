@@ -189,7 +189,9 @@ export default {
             for (let i = 0 ; i < 24 ; i++) {
                 for (let d = 0 ; d < Object.keys(DAYS).length ; d++) {
                     const currentCell = document.querySelector(`#c-${i}-${DAYS[d]}`)
-                    currentCell.innerHTML = ""
+                    if(currentCell){
+                        currentCell.innerHTML = ""
+                    }
                 }
             }
         },
@@ -240,13 +242,13 @@ export default {
                     let cellule = document.querySelector(`#c-${i}-${DAYS[d]}`)
                     let dateCell = cellule.getAttribute("data-date").replace('Z', '')
                     let currentLocaleDate = convertToLocaleDate(dateCell)
-                    //console.log(currentLocaleDate)
                     
                     for (let e of this.events) {
-                        let dateDeb = convertToLocaleDate(e.dateDeb)
-                        let dateFin = convertToLocaleDate(e.dateFin)
+                        let dateDeb = convertToLocaleDate(e.dateDeb);
+                    dateDeb.setDate(dateDeb.getDate() + 1)
+                    let dateFin =convertToLocaleDate(e.dateFin);
+                    dateFin.setDate(dateFin.getDate() + 1)
 
-                        //console.log(currentLocaleDate.getDate() === dateDeb.getDate())
                     
                         if (currentLocaleDate.getDate() === dateDeb.getDate() 
                             || (dateFin && currentLocaleDate.getTime() <= dateFin.getTime() && currentLocaleDate.getTime() >= dateDeb.getTime())
