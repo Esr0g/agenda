@@ -1,43 +1,40 @@
-<template >
-    <table class="m-auto mt-10 bg-[#f9fafb] w-5/6">
-        <thead>
-
-
-
-        <tr>
-            <td @click="previousWeek" class="p-2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="relative cursor-pointer w-6 h-6 left-5">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
-                </svg>
-            </td>
-            <th colspan="5" class="p-2 text-lg font-bold">
-                <div class="inline" title="Retour au mois actuel">
-                    <svg xmlns="http://www.w3.org/2000/svg" @click="rezDate" fill="none" viewBox="0 2 20 24"
-                        stroke-width="1.5" stroke="currentColor" class="inline w-6 h-6 cursor-pointer">
+<template>
+        <table class="m-auto mt-10 bg-[#f9fafb] w-5/6">
+            <thead>
+            <tr>
+                <td colspan="1" @click="previousWeek" class="text-left">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="relative cursor-pointer w-6 h-6 left-5">
                         <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                            d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
                     </svg>
-                </div>
-            </th>
-            <th colspan="5" class="p-2 text-lg font-bold"></th>
-            <td @click="nextWeek" class="p-2 text-right"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                    class="relative inline-block cursor-pointer w-6 h-6 mr-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
-                </svg></td>
-        </tr>
-        <tr id="table-days" class="bg-white">
+                </td>
+                <td colspan="6" class="text-center font-bold">
+                    <div class="inline" title="Retour à la semaine actuel">
+                        <svg xmlns="http://www.w3.org/2000/svg" @click="rezDate" fill="none" viewBox="0 2 20 24"
+                            stroke-width="1.5" stroke="currentColor" class="inline w-6 h-6 cursor-pointer">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                        </svg>
+                    </div>
+                </td>
+                <td colspan="1" @click="nextWeek" class="text-right"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                        class="relative inline-block cursor-pointer w-6 h-6 mr-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+                    </svg></td>
+            </tr>
+            <tr id="table-days" class="bg-white">
 
-        </tr>
-    </thead>
-     <tbody id="table-cell">
+            </tr>
+        </thead>
+        <tbody id="table-cell">
 
-     </tbody>
+        </tbody>
 
-    </table>
+        </table>
+
     <div class="w-full p-4"></div>
     <AddEventModal v-if="showAddEventModal" :date="dateSelected" :form.heureDeb="heureDebSelected" @close="closeModal"/>
     <ShowEventModal v-if="showShowEventModal" :event="event" @close="closeModal" @modify="updateEvent"/>
@@ -61,6 +58,9 @@ const DAYS = {
     5: 'Vendredi',
     6: 'Samedi'
 }
+
+let currentDay = new Date()
+
 export default {
     name: "MonthView",
     data() {
@@ -81,32 +81,24 @@ export default {
     beforeMount() {
         this.monthName = mois[this.$dayjs().month()] + " " + this.$dayjs().year();
         this.date = this.$dayjs();
-        this.initCases();
     },
 
     mounted() {
         this.buildCaseJour();
         this.buildCaseHeureJour();
-        this.setJourCases();
         this.setCouleurCaseJour();
         this.createCaseEvent();
         this.updateEvents();
     },
 
     methods: {
-        initCases() {
-            for (let i = 0; i < 42; i++) {
-                this.cases.push({ num: i });
-            }
-        },
-
+        
         async getAllEvent() {
             let data = {
                 userID: this.getUserId(),
                 dateDeb: this.cases[0].date,
                 dateFin: this.cases[41].date,
             }
-
 
             this.$http({
                 method: 'get',
@@ -122,21 +114,20 @@ export default {
         },
 
         buildCaseJour(){
-
-            let today = new Date()
-            
             let enteteDesJours = document.querySelector('#table-days');
             let enteteDesJoursHTML = '';
             enteteDesJoursHTML += '<th class="border-y border-r border-[#d1d5db] text-center w-1/7 font-bold">Horaires</th>';
             jours.forEach(j => {
-                let dayOfWeek = today.getDay()
-                let dayOfMonth = today.getDate()
+                let dayOfWeek = currentDay.getDay()
+                let dayOfMonth = currentDay.getDate()
                 let dayOffset = parseInt(Object.keys(DAYS).find(k => DAYS[k] === j))
                 let dayOfCell = dayOfMonth - dayOfWeek + (dayOfWeek === 0 ? -6 : 1) + dayOffset
-                let dateCell = new Date(today.getFullYear(), today.getMonth(), dayOfCell, 0, 0, 0).toISOString()
-                enteteDesJoursHTML += `<th class="border-y border-r border-[#d1d5db] text-center w-1/7 font-bold" data-date="${dateCell}">${j}</th>`;
+                let dateCell = new Date(currentDay.getFullYear(), currentDay.getMonth(), dayOfCell, 0, 0, 0).toISOString()
+                let date = dateCell.split('T')[0]
+                let dateFormat = date.split('-').reverse()
+                let datePerDay = dateFormat[0] + "/" + dateFormat[1] + "/" + dateFormat[2]
+                enteteDesJoursHTML += `<th class="border-y border-r border-[#d1d5db] text-center w-1/7 font-bold" data-date="${dateCell}">${j} &nbsp; ${datePerDay}</th>`;
             });
-
             enteteDesJours.innerHTML = enteteDesJoursHTML;
         },
 
@@ -164,12 +155,11 @@ export default {
 
                         heureHTML += caseHorairesHTML;
                         }
-                        let today = new Date()
-                        let dayOfWeek = today.getDay()
-                        let dayOfMonth = today.getDate()
+                        let dayOfWeek = currentDay.getDay()
+                        let dayOfMonth = currentDay.getDate()
                         let dayOffset = parseInt(Object.keys(DAYS).find(k => DAYS[k] === j))
                         let dayOfCell = dayOfMonth - dayOfWeek + (dayOfWeek === 0 ? -6 : 1) + dayOffset
-                        let dateCell = new Date(today.getFullYear(), today.getMonth(), dayOfCell - 1, h + 1, 0, 0).toISOString()
+                        let dateCell = new Date(currentDay.getFullYear(), currentDay.getMonth(), dayOfCell - 1, h + 1, 0, 0).toISOString()
                         let uneCaseHTML = `
                             <td id="c-${h}-${j}" class="border-y border-r border-[#d1d5db] h-32" data-date="${dateCell}">
                                 <span class="num" data-modal-toggle="defaultModal"></span>
@@ -188,8 +178,7 @@ export default {
         },
 
         setCouleurCaseJour() {
-            const today = new Date()
-            const dayOfWeek = today.getDay()
+            const dayOfWeek = currentDay.getDay()
 
             for (let i = 0 ; i < 24 ; i++) {
                 const currentDay = document.querySelector(`#c-${i}-${DAYS[dayOfWeek]}`)
@@ -214,75 +203,16 @@ export default {
             }
         },
 
-
-        setJourCases() {
-            this.cases = [];
-            let nbCasesParcourue = 0;
-
-            // Mois actuel
-            let nbJourMoisA = this.date.daysInMonth();
-            let firstDayOfMonthA = this.date.startOf("month").day() === 0 ? 6 : this.date.startOf("month").day() - 1;
-
-            //Mois précédent
-            let moisP = this.date.month() === 0 ? 11 : this.date.month() - 1;
-            let nbJourMoisP = this.date.month(moisP).daysInMonth();
-            let moisPP = this.date.startOf("month").add(-firstDayOfMonthA, "day");
-            nbJourMoisP = nbJourMoisP - firstDayOfMonthA + 1;
-
-            for (let i = 0; i < firstDayOfMonthA; i++) {
-                const uneCase = {
-                    num: nbJourMoisP,
-                    date: moisPP.toJSON()
-                };
-                this.cases.push(uneCase);
-                nbJourMoisP++;
-                nbCasesParcourue++;
-                moisPP = moisPP.add(1, "day");
-            }
-
-            let moisA = this.date.startOf("month");
-            for (let i = 1; i < nbJourMoisA + 1; i++) {
-
-                const uneCase = {
-                    num: i,
-                    date: moisA.toJSON()
-                };
-                this.cases.push(uneCase);
-                //document.querySelector("#case-" + nbCasesParcourue).classList.add("jour-blanc");
-                nbCasesParcourue++;
-                moisA = moisA.add(1, "day");
-            }
-
-            let moisS = this.date.endOf("month").add(1, "day");
-            let jourMoisS = 1;
-            for (let i = nbCasesParcourue; i < 42; i++) {
-
-                const uneCase = {
-                    num: jourMoisS,
-                    date: moisS.toJSON()
-                };
-                this.cases.push(uneCase);
-                jourMoisS++;
-                moisS = moisS.add(1, "day");
-            }
-
-            this.clearAllEvent();
-            this.getAllEvent();
-        },
-
         addCaseEvent() {
             for (let i = 0 ; i < 42 ; i ++) {
                 let elem = documents.querySelector("#emp-" + i);
                 console.log(elem)
                 elem.addEventListener('click', (e) => {
                     addEvent(cases[i].date)
-                    console.log("TEST")
                 })
 
             }
         },
-
-        //@click="addEvent(cases[${j}].date)"
 
         clearAllEvent() {
             for (let i = 0; i < 42; i++) {
@@ -293,32 +223,25 @@ export default {
             }
         },
 
-        previousMonth() {
-            this.rezBgCell();
-            this.date = this.date.startOf("month").add(-1, "day");
-            this.monthName = mois[this.date.month()] + " " + this.date.year();
-            this.setJourCases();
+        previousWeek() {
+            currentDay.setDate(currentDay.getDate() - 7)
+            this.buildCaseJour();
+            this.buildCaseHeureJour();
         },
 
-        nextMonth() {
-            this.rezBgCell();
-            this.date = this.date.endOf("month").add(1, "day");
-            this.monthName = mois[this.date.month()] + " " + this.date.year();
-            this.setJourCases();
+        nextWeek() {
+            currentDay.setDate(currentDay.getDate() + 7)
+            this.buildCaseJour();
+            this.buildCaseHeureJour();
         },
 
-        rezBgCell() {
-            for (let i = 0; i < 42; i++) {
-                //document.querySelector("#case-" + i).classList.remove("jour-blanc");
-                //document.querySelector("#case-" + i).classList.remove("jourActuel");
-            }
-        },
 
         rezDate() {
-            this.date = this.$dayjs();
-            this.rezBgCell();
-            this.monthName = mois[this.date.month()] + " " + this.date.year();
-            this.setJourCases();
+            currentDay = new Date()
+            this.buildCaseJour()
+            this.buildCaseHeureJour()
+            this.setCouleurCaseJour()
+
         },
 
         addEvent(date) {
