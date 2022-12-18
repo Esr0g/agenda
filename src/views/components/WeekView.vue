@@ -200,7 +200,9 @@ export default {
             for (let i = 0 ; i < 24 ; i++) {
                 for (let d = 0 ; d < Object.keys(DAYS).length ; d++) {
                     const currentCell = document.querySelector(`#c-${i}-${DAYS[d]}`)
-                    currentCell.innerHTML = ""
+                    if(currentCell){
+                        currentCell.innerHTML = ""
+                    }
                 }
             }
         },
