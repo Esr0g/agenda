@@ -85,7 +85,10 @@ export function getEventParam(req, res, next) {
             if (events) {
                 for (let evt of events) {
                     let date = dayjs(evt.dateDeb)
-                    if ((date.isSame(date1, 'day') || date.isAfter(date1, 'day')) && (date.isSame(date2, 'day') || date.isBefore(date2, 'day'))) {
+                    let date3 = dayjs(evt.dateFin);
+                    if ((date.isSame(date1, 'day') || date.isAfter(date1, 'day')) && (date.isSame(date2, 'day') || date.isBefore(date2, 'day'))
+                        || (date1.isAfter(date) && date2.isBefore(date3))
+                        || (date1.isAfter(date) && date2.isSame(dateFin))) {
                         newEvents.push(evt);
                     }
                 }

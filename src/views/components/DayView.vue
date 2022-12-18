@@ -51,7 +51,8 @@ const DAYS = {
     5: 'Vendredi',
     6: 'Samedi'
 }
-let currentDay = new Date()
+
+
 export default {
     name: "DayView",
     data() {
@@ -65,29 +66,35 @@ export default {
             dateSelected: null,
             heureDebSelected: null,
             events: [],
-            event: null
+            event: null,
+            mounted: false
         };
     },
+
     beforeMount() {
-        this.day = new Date().toLocaleDateString()
-        this.date = this.$dayjs()
+        this.day = new Date().toLocaleDateString();
+        this.date = this.$dayjs();
     },
+
     mounted() {
-        this.buildCases()
-        this.createCaseEvent()
-        this.updateEvents()
+        this.mounted = true;
+        this.buildCases();
+        this.createCaseEvent();
+        this.getEvents();
+        this.updateEvents();
     },
+
+    beforeUnmount() { 
+        this.mounted = false;
+    },
+
     methods: {
         buildCases() {
             let enteteDesHeures = document.querySelector('#table-days');
             let enteteDesHeuresHTML = '<th colspan="1" class="border-y border-r border-[#d1d5db] text-center w-1/7 font-bold">Horaires</th>'
           
-            let dayOfWeekName = DAYS[currentDay.getDay()]
-            let dateCell = currentDay.toISOString()
-            dateCell = dateCell.split('T')[0]
-            let dateFormat = dateCell.split('-').reverse()
-            dateFormat = dateFormat[0] + "/" + dateFormat[1] + "/" + dateFormat[2]
-            enteteDesHeuresHTML += `<th colspan="7" id="current-day" class="border-y border-r border-[#d1d5db] text-center w-6/7 font-bold" data-date="${dateCell}">${dayOfWeekName}&nbsp; ${dateFormat}</th>`
+            let dayOfWeekName = DAYS[this.date.day()];
+            enteteDesHeuresHTML += `<th colspan="7" id="current-day" class="border-y border-r border-[#d1d5db] text-center w-6/7 font-bold" data-date="${this.date.toJSON()}">${dayOfWeekName}&nbsp; ${this.date.format("DD/MM/YYYY")}</th>`
             enteteDesHeures.innerHTML = enteteDesHeuresHTML;
             let heureHTML
             let cases = document.querySelector('#table-cell');
@@ -106,11 +113,10 @@ export default {
                     </td>`;
                 heureHTML += caseHorairesHTML;
                 
-                let element = document.querySelector('#current-day')
-                let dataDate = element.getAttribute('data-date')
-                let dateCell = dataDate + 'T' + heure
+                let element = document.querySelector('#current-day');
+                let dataDate = this.$dayjs(this.date).hour(h + 1).minute(0);
                 let uneCaseHTML = `
-                    <td colspan="7" id="c-${h}" class="border-y border-r border-[#d1d5db] h-32" data-date="${dateCell}">
+                    <td colspan="7" id="c-${h}" class="border-y border-r border-[#d1d5db] h-32" data-date="${dataDate.toJSON()}">
                         <span class="num" data-modal-toggle="defaultModal"></span>
                     </td>
                 `;
@@ -120,51 +126,63 @@ export default {
                 cases.innerHTML = casesHTML;
           
                 };
-            },
+        },
+            
             createCaseEvent() {
             for (let i = 0 ; i < 24 ; i++) {
                 const currentCell = document.querySelector(`#c-${i}`)
                 currentCell.addEventListener('click', (e) => {
-                    let dateCell = currentCell.getAttribute('data-date')
-                    this.showAddEventModal = true
-                    this.dateSelected = dateCell.split('T')[0]
-                    this.heureDebSelected = dateCell.split('T')[1]
+                    if (this.showShowEventModal !== true) { 
+                        let dateCell = currentCell.getAttribute('data-date');
+                        this.showAddEventModal = true;
+                        this.dateSelected = this.$dayjs(dateCell).format("YYYY-MM-DD");
+                    }
                 })
             }
         },
         clearAllEvent() {
-            this.events = []
             for (let i = 0 ; i < 24 ; i++) {
                 const currentCell = document.querySelector(`#c-${i}`)
                 if(currentCell){
-                    currentCell.innerHTML = ""
+                    currentCell.innerHTML = "";
                 }
             }
         },
+
         previousDay() {
-            currentDay.setDate(currentDay.getDate() - 1)
-            this.buildCases()
-            this.createCaseEvent()
+            this.date = this.date.add(-1, 'd');
+            this.buildCases();
+            this.createCaseEvent();
+            this.getEvents();
         },
+
         nextDay() {
-            currentDay.setDate(currentDay.getDate() + 1)
-            this.buildCases()
-            this.createCaseEvent()
+            this.date = this.date.add(1, 'd');
+            this.buildCases();
+            this.createCaseEvent();
+            this.getEvents();
         },
+
         rezDate() {
-            currentDay = new Date()
-            this.buildCases()
-            this.createCaseEvent()
+            this.date = this.$dayjs();
+            this.buildCases();
+            this.createCaseEvent();
+            this.getEvents();
         },
+
         addEvent(date) {
-            this.dateSelected = this.$dayjs(date).format("YYYY-MM-DD");
-            this.showAddEventModal = true;
+            if (this.showShowEventModal !== true) { 
+                this.dateSelected = this.$dayjs(date).format("YYYY-MM-DD");
+                this.showAddEventModal = true;
+            }
         },
+
         closeModal(val) {
             this.showAddEventModal = val;
             this.showShowEventModal = val;
             this.showUpdateEventModal = val;
         },
+
         getUserId() {
             let cookies = document.cookie.split("=");
             let user = JSON.parse(cookies[1]);
@@ -177,88 +195,100 @@ export default {
                 let dateCell = this.$dayjs(cellule.getAttribute("data-date"));
         
                 for (let e of this.events) {
-                    console.log(ok);
                     let dateDeb = this.$dayjs(e.dateDeb);
                     let dateFin = null;
                     if (e.dateFin) { 
                         dateFin = this.$dayjs(e.dateFin);
                     }
                     
-                    if (dateCell.isSame(dateDeb, 'day') && dateCell.isAfter(dateDeb, 'hour')) {
+                    if ((dateCell.isSame(dateDeb, 'day') && (dateCell.isSame(dateDeb, 'hour') || dateCell.isSame(dateFin, 'hour') || (dateCell.isBefore(dateFin, 'day') && dateCell.isAfter(dateDeb, 'hour'))))
+                            || (dateCell.isAfter(dateDeb, 'day') && dateCell.isBefore(dateFin, 'day'))
+                        || (dateCell.isSame(dateFin, 'day') && (dateCell.isSame(dateFin, 'hour') || (dateCell.isBefore(dateFin, 'hour') && dateCell.isAfter(dateDeb, 'hour'))))) {
                         
-                            if (cellule.children.length < 3) {
-                                let element = document.createElement('div');
-                                element.classList.add("event");
-                                element.classList.add("display-event")
-                                element.addEventListener("click", () => {
-                                    this.afficheEvt(e);
-                                });
-                                let eventName = document.createTextNode(e.name);
-                                let eventStart = document.createTextNode(dateDeb);
-                                let divElement = document.createElement('div');
-                                divElement.style.maxWidth = "60%";
-                                divElement.style.overflow = "hidden";
-                                divElement.style.textOverflow = "ellipsis";
-                                divElement.style.whiteSpace = "nowrap";
-                                let child2 = document.createElement('div');
-                                child2.marginLeft = "0.5rem";
-                                divElement.appendChild(eventName);
-                                divElement.appendChild(eventStart);
-                                element.appendChild(divElement);
-                                cellule.appendChild(element);
-                            } else {
-                                cellule.removeChild(cellule.lastChild);
-                                let element = document.createElement('div')
-                                element.style.textAlign = "center";
-                                element.style.maxWidth = "100%";
-                                element.style.border = "2px #ceeafa solid";
-                                element.style.borderRadius = "8px";
-                                element.style.margin = "0.1rem 0.2rem 0.1rem 0.2rem";
-                                element.style.backgroundColor = "#ebf8ff";
-                                element.style.paddingLeft = "0.2rem";
-                                element.style.paddingRight = "0.2rem";
-                                element.style.color = "#203d68";
-                                let text = document.createTextNode("...");
-                                element.appendChild(text);
-                                cellule.append(element);
-                                //TODO 
-                            }
+                        let element = document.createElement('div');
+                        element.classList.add("event");
+                        element.classList.add("display-event");
+                        element.addEventListener("click", () => {
+                            this.afficheEvt(e);
+                        });
+                        let eventName = document.createTextNode(e.name);
+                        let eventStart = document.createTextNode("     Deb : " + dateDeb.format("H:mm") + "    Description : " + e.description);
+                        let divElement = document.createElement('div');
+                        divElement.style.maxWidth = "60%";
+                        divElement.style.overflow = "hidden";
+                        divElement.style.textOverflow = "ellipsis";
+                        divElement.style.whiteSpace = "nowrap";
+                        let child2 = document.createElement('div');
+                        child2.marginLeft = "0.5rem";
+                        divElement.appendChild(eventName);
+                        divElement.appendChild(eventStart);
+                        element.appendChild(divElement);
+                        cellule.appendChild(element);
+
                     }
                 }
             }
         },
-        updateEvents() {
-            this.clearAllEvent()
-            let dateDebutText = document.querySelector("#c-0").getAttribute("data-date")
-            let dateFinText = document.querySelector("#c-23").getAttribute("data-date")
-            let dateDebut = convertToLocaleDate(dateDebutText)
-            dateDebut.setDate(dateDebut.getDate() - 1)
-            let dateDebutQuery = dateDebut.toISOString().split('T')[0]
-            let dateFin = convertToLocaleDate(dateFinText)
-            dateFin.setDate(dateFin.getDate() + 1)
-            let dateFinQuery = dateFin.toISOString().split('T')[0]
-            //console.log(dateDebut, dateFin)
+
+        getEvents() {
+            this.events = [];
+            this.clearAllEvent();
+
             let data = {
                 userID: this.getUserId(),
-                dateDeb: dateDebutQuery,
-                dateFin: dateFinQuery,
+                dateDeb: this.date.toJSON(),
+                dateFin: this.date.toJSON(),
             }
             this.$http({
                 method: 'get',
                 url: '/api/auth/getEventParam',
                 params: data
             }).then((res) => {
-                this.events = this.data.newEvents;
+                this.events = res.data.newEvents;
+                console.log(this.events.length);
                 this.afficherEvents()
             }).catch((err) => {
                 console.log(err)
             });
-            setTimeout(this.updateEvents, 3000);
         },
+
+        updateEvents() {
+            if (this.mounted) { 
+                this.$http({
+                    method: 'get',
+                    url: '/api/auth/getEventUpdate'
+                }).then((res) => {
+                    if (res.data.type === "ADD") {
+                        this.events.push(res.data.event);
+                        this.clearAllEvent();
+                        this.afficherEvents();
+                    } else if (res.data.type === "DELETE") {
+                        this.events = _.reject(this.events, (e) => e.id == res.data.eventID);
+                        this.clearAllEvent();
+                        this.afficherEvents();
+                    } else if (res.data.type === "MODIFY") {
+                        this.events = _.reject(this.events, (e) => e.id == res.data.oldId);
+                        this.events.push(res.data.event);
+                        this.clearAllEvent();
+                        this.afficherEvents();
+                    }
+    
+                    if (this.mounted) { 
+                        setTimeout(this.updateEvents, 500);
+                    }
+                }).catch((err) => {
+                    if (this.mounted) { 
+                        setTimeout(this.updateEvents, 5000);
+                    }
+                });
+            }
+        },
+
         afficheEvt(evt) {
             this.event = evt;
             this.showShowEventModal = true;
         },
+
         updateEvent(evt) {
             this.event = evt;
             this.showUpdateEventModal = true;

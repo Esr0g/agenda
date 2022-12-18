@@ -140,7 +140,7 @@ export default {
                     }
 
                     let uneCaseHTML = `
-                        <td id="c-${h}-${jours[j]}" class="border-y border-r border-[#d1d5db] h-32" data-date="${this.date.weekday(-r).hour(h + 1).minute(1).toJSON()}">
+                        <td id="c-${h}-${jours[j]}" class="border-y border-r border-[#d1d5db] h-32" data-date="${this.date.weekday(-r).hour(h).minute(1).toJSON()}">
                             <span class="num" data-modal-toggle="defaultModal"></span>
                         </td>
                     `;
@@ -150,7 +150,7 @@ export default {
                 }
 
                 let uneCaseHTML = `
-                        <td id="c-${h}-Dimanche" class="border-y border-r border-[#d1d5db] h-32" data-date="${this.date.weekday(0).hour(h+1).minute(0).toJSON()}">
+                        <td id="c-${h}-Dimanche" class="border-y border-r border-[#d1d5db] h-32" data-date="${this.date.weekday(0).hour(h).minute(0).toJSON()}">
                             <span class="num" data-modal-toggle="defaultModal"></span>
                         </td>
                     `;
@@ -188,8 +188,7 @@ export default {
                         if (this.showShowEventModal !== true) { 
                             this.showAddEventModal = true
                         }
-                        this.dateSelected = dateCell.split('T')[0]
-                        this.heureDebSelected = dateCell.split('T')[1]
+                        this.dateSelected = this.$dayjs(dateCell).format("YYYY-MM-DD");
                     })
                 }
             }
@@ -266,7 +265,7 @@ export default {
 
                         if ((dateCell.isSame(dateDeb, 'day') && (dateCell.isSame(dateDeb, 'hour') || dateCell.isSame(dateFin, 'hour') || (dateCell.isBefore(dateFin, 'day') && dateCell.isAfter(dateDeb, 'hour'))))
                             || (dateCell.isAfter(dateDeb, 'day') && dateCell.isBefore(dateFin, 'day'))
-                        || (dateCell.isSame(dateFin, 'day') && (dateCell.isSame(dateFin, 'hour') || dateCell.isBefore(dateFin, 'hour')))) {
+                        || (dateCell.isSame(dateFin, 'day') && (dateCell.isSame(dateFin, 'hour') || (dateCell.isBefore(dateFin, 'hour') && dateCell.isAfter(dateDeb, 'hour'))))) {
 
                             if (cellule.children.length < 3) {
                                 let element = document.createElement('div');
